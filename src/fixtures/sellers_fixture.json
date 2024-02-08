@@ -1,0 +1,22 @@
+[
+  {
+    "model": "account.seller",
+    "pk": 1,
+    "fields": {
+      "name": "ООО \"Торговый дом\"",
+      "description": "This is a new seller",
+      "profile": 2,
+      "archived": false
+    }
+  },
+  {
+    "model": "account.seller",
+    "pk": 2,
+    "fields": {
+      "name": "ИП Петров",
+      "description": "This is a second seller",
+      "profile": 4,
+      "archived": false
+    }
+  }
+]

@@ -1,0 +1,128 @@
+{% extends 'base.jinja2' %}
+
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{{ static('assets/css/basic.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ static('assets/css/fonts.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ static('assets/css/extra.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ static('assets/css/seller.css') }}">
+{% endblock %}
+
+{% block header %}
+    {% include 'common/header_parts/header_middle_full.jinja2' %}
+    {% include 'common/header_parts/header_search.jinja2' %}
+{% endblock %}
+
+{% block title %}
+{{ seller.name }}
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <div class="Middle Middle_top">
+            <div class="Middle-top">
+                <div class="wrap">
+                    <div class="Middle-header">
+                        <h1 class="Middle-title">{{seller.name}}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="Section">
+                <div class="wrap">
+                    <div class="Section-content">
+                        <div class="Seller">
+                            <div class="Seller-infoBlock">
+                                {% cache 86400 seller %}
+                                <div class="Seller-personal">
+                                    <div class="row">
+                                        {% if seller.description %}
+                                            <div class="row-block">
+                                                <div class="Seller-description">
+                                                    {{ seller.description }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% if seller.profile.avatar %}
+                                            <div class="row-block">
+                                                <div class="Seller-avatar">
+                                                    <img src="{{ seller.profile.avatar }}" alt="аватар продавца">
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="row">
+                                        <div class="row-block">
+                                            <div class="Seller-info">
+                                                <div class="Seller-infoType">
+                                                    Телефон:
+                                                </div>
+                                                <div class="Seller-infoContent">
+                                                    {{ seller.profile.phone }}
+                                                </div>
+                                            </div>
+                                            <div class="Seller-info">
+                                                <div class="Seller-infoType">
+                                                    E-mail:
+                                                </div>
+                                                <div class="Seller-infoContent">
+                                                    {{ seller.profile.email}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row-block">
+                                            <div class="Seller-info">
+                                                <div class="Seller-infoType">
+                                                    Адрес:
+                                                </div>
+                                                <div class="Seller-infoContent">
+                                                    {{ seller.profile.address }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endcache %}
+                                {% cache top_products_cache_time top_products %}
+                                <div class="Cart Cart_seller">
+                                    {% for product in products %}
+                                        <div class="Cart-product">
+                                            <div class="Cart-block Cart-block_row">
+                                                <div class="Cart-block Cart-block_pict">
+                                                    <a class="Cart-pict" href="#">
+                                                        <img class="Cart-img" src="/media/{{ product.images.first().image }}" alt="card.jpg">
+                                                    </a>
+                                                </div>
+                                                <div class="Cart-block Cart-block_info"><a class="Cart-title" href="#">{{ product.name }}</a>
+                                                    <div class="Cart-desc">
+                                                        {{ product.description }}
+                                                    </div>
+                                                </div>
+                                                <div class="Cart-block Cart-block_price">
+                                                    <div class="Cart-price">
+                                                        {{ product.sellerproduct_set.first().price }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="Cart-block Cart-block_row">
+                                                <div class="Cart-block Cart-block_amount">
+                                                    {{ product.sellerproduct_set.first().count }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                                {% endcache %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+

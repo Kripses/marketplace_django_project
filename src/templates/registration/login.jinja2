@@ -1,0 +1,47 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block header %}
+  {% include 'common/header_min.jinja2' %}
+{% endblock %}
+
+{% block content %}
+  <link href="{{ static('assets/css/profile_style.css') }}" rel="stylesheet">
+
+   <div class="wrapper">
+      <div class="header">
+          <h3 class="sign-in">Вход</h3>
+      </div>
+      <div class="clear"></div>
+      <form action="{{ request.path }}" method="post">
+          {% csrf_token %}
+            <div>
+                <input class="user-input" type="text" name="username" id="id_username" placeholder="E-mail" required />
+            </div>
+            <div>
+                <input type="password" name="password" id="id_password" placeholder="*********" />
+            </div>
+            <div>
+                <input type="submit" value="Войти" />
+            </div>
+            <div>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+            <a class="forgot-label" href="../e-mail">Забыли пароль?</a>
+            <a class="registr" href="{{ url('account:register') }}">
+                Регистрация
+            </a>
+
+          {% if errors %}
+            <div class="error_text">
+            <p>Неверное имя пользователя либо пароль.</p>
+{#              {{ form.errors }}#}
+            </div>
+          {% endif %}
+
+      </form>
+    </div>
+{% endblock %}

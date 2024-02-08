@@ -1,0 +1,69 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+    Megano
+{% endblock %}
+
+{% block header %}
+    {% include 'common/header_parts/header_middle_full.jinja2' %}
+    {% include 'common/header_parts/header_search.jinja2' %}
+{% endblock %}
+
+{% block content %}
+    <div class="Middle Middle_top">
+        <div class="Section">
+            <div class="wrap">
+                {% for product in cart %}
+                    <div class="Cart-product" id="product_cart_{{ product.pk }}">
+                        <div class="Cart-block Cart-block_row">
+                            <div class="Cart-block Cart-block_pict">
+                                <a class="Cart-pict" href="{{ product.product_obj.get_absolute_url() }}">
+                                    <img class="Cart-img" src="{{ product.pict }}">
+                                </a>
+                            </div>
+                            <div class="Cart-block Cart-block_info">
+                                <a class="Cart-title" href="{{ product.product_obj.get_absolute_url() }}">
+                                    {{ product.name }}
+                                </a>
+                                <div class="Cart-desc">{{ product.desc }}</div>
+                            </div>
+                            <div class="Cart-block Cart-block_price">
+                                <div class="Cart-price" id="product_price_{{ product.pk }}">{{ product.price * product.count }}$</div>
+                            </div>
+                        </div>
+                        <div class="Cart-block Cart-block_row">
+                            <div class="Cart-block Cart-block_seller">
+                                <!-- - var options = setOptions(items, ['value', 'selected', 'disabled']);-->
+
+                            </div>
+                            <div class="Cart-block Cart-block_amount">
+                                <div class="Cart-amount">
+                                    <div class="Amount">
+                                        <button class="Amount-remove" type="button" onclick="changing_product_amt('{{ product.pk }}', -1, '{{ product.max_product_amt }}', '{{ request.user.is_authenticated }}')"></button>
+                                        <input class="Amount-input form-input" name="amount" type="text" id="input_{{ product.pk }}" value="{{ product.count }}">
+                                        <button class="Amount-add" type="button" onclick="changing_product_amt('{{ product.pk }}', 1, '{{ product.max_product_amt }}', '{{ request.user.is_authenticated }}')"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Cart-block Cart-block_delete">
+                                <a class="Cart-delete" href="#" id="remove_{{ product.pk }}" onclick="remove_product('{{ product.pk }}', '{{ request.user.is_authenticated }}')">
+                                    <img src="{{ static('assets/img/icons/card/delete.svg') }}" alt="delete.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                    <div class="Cart-total">
+                        <div class="Cart-block Cart-block_total">
+                            <strong class="Cart-title">Итого:</strong>
+                            <span class="Cart-price" id="total_price">{{ total_price }}$</span>
+                        </div>
+                        <div class="Cart-block">
+                            <a class="btn btn_success btn_lg" href="{{ url('cart:create_order') }}">Оформить заказ</a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+<script src="{{ static('assets/js/cart/cart_page.js') }}"></script>
+{% endblock %}

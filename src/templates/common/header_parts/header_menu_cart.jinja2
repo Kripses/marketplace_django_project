@@ -1,0 +1,60 @@
+<nav class="row-block row-block_right Header-menu">
+    <div class="menuModal" id="navigate">
+        <ul class="menu menu_main">
+            <li class="menu-item">
+                <a class="menu-link" href="{{ url('index') }}">Главная</a>
+            </li>
+            <li class="menu-item">
+                {% if active_discounts %}
+                    <a href="{{ url('discounts:discounts_list') }}">
+                        <span class="menu-label menu-label_success">Скидки</span>
+                    </a>
+                {% endif %}
+                <a class="menu-link" href="{{ url('products:catalog') }}">Каталог</a>
+            </li>
+            <li class="menu-item">
+                <a class="menu-link" href="{{ url('products:product_compare') }}">
+                    Сравнение
+                    <span class="CartBlock-amount" style="display: none" id='compare_amt'></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="row-block">
+    <div class="CartBlock">
+        {% if user.is_authenticated %}
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <img class="CartBlock-img"
+                         src="{{ static('assets/img/icons/loon-icon.svg') }}"
+                         alt="loon-icon.svg" />
+                </button>
+                <div class="dropdown-content">
+                    <a class="dropdown-content-a" href="{{ url('account:account') }}">Личный кабинет</a>
+                    {% if user.is_staff %}
+                        <a class="dropdown-content-a" href="{{ url('admin:index') }}">Административный раздел</a>
+                    {% endif %}
+                    <a class="dropdown-content-a" href="{{ url('account:logout') }}">Выход</a>
+                </div>
+            </div>
+        {% endif %}
+        <a class="CartBlock-block" href="{{ url('cart:cart_view') }}">
+            <img class="CartBlock-img"
+                 src="{{ static('assets/img/icons/cart.svg') }}"
+                 alt="Корзина" />
+            <span class="CartBlock-amount" id="cart_amt_header"></span>
+        </a>
+{#        <div class="CartBlock-block">#}
+{#            <span class="CartBlock-price" id="cart_total_price"></span>#}
+{#        </div>#}
+    </div>
+</div>
+<div class="row-block Header-trigger">
+    <a class="menuTrigger" href="#navigate">
+        <div class="menuTrigger-content">
+            Показать навигацию
+        </div>
+        <span></span><span></span><span></span>
+    </a>
+</div>

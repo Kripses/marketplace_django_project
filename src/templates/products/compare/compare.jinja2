@@ -1,0 +1,88 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+    Megano
+{% endblock %}
+
+{% block header %}
+    {% include 'common/header_parts/header_middle_full.jinja2' %}
+    {% include 'common/header_parts/header_search.jinja2' %}
+{% endblock %}
+
+{% block content %}
+    <div class="Middle">
+            <div class="wrap">
+            {% if properties|length != 0 %}
+                <div class="Product Product-compare" id="compare-main">
+                    <p id="compare-main-error"></p>
+                    {% if diff_category %}
+                        <p style="color: red" id="compare_dif_category">Неасравнимое не сравнить</p>
+                    {% endif %}
+                    <div class="Product-delete-all">
+                        <div class="form-group" id="properties_chekbox_div">
+                            <label class="toggle">
+                                <input type="checkbox" id="type_properties" onclick="change_properties()" checked>
+                                <span class="toggle-box"></span>
+                                <span class="toggle-text">Только различающиеся характеристики</span>
+                            </label>
+                        </div>
+                        <a style="text-decoration: none;" onclick="delete_all()">
+                            <span class="Delete-all-products">Удалить всё&nbsp</span>
+                            <img src="{{ static('assets/img/icons/card/delete.svg') }}" alt="delete.svg">
+                        </a>
+                    </div>
+                    <div class="ProductCard ProductCard-comparasion" id="all_products">
+                        {% for elem in properties %}
+                            <div class="ProductCard-desc ProductCard-desc-compare" id="{{ elem.slug }}">
+                                <div class="ProductCard-header">
+                                    <h2 class="ProductCard-title ProductCard-title-compare">{{ elem.product }}
+                                        <a onclick="delete_product('{{ elem.slug }}')">
+                                            <img src="{{ static('assets/img/icons/card/delete.svg') }}" alt="delete.svg">
+                                        </a>
+                                    </h2>
+                                    <div class="ProductCard-look">
+                                        <div class="ProductCard-photo ProductCard-photo-compare">
+                                            <img src="{{ elem.img }}"
+                                                 alt="bigGoods.png">
+                                        </div>
+                                    </div>
+                                    {% if not elem.diff_category %}
+                                        <div class="Tabs Tabs_default">
+                                            <div class="Tabs-wrap">
+                                                <div class="Tabs-block" id="description">
+                                                    <div class="table table-diff">
+                                                        {% include 'products/compare/properties-diff.jinja2' %}
+                                                    </div>
+                                                    <div class="table table-no-diff">
+                                                        {% include 'products/compare/properties.jinja2' %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="ProductCard-info">
+                                    <div class="ProductCard-cost">
+                                        <div class="ProductCard-price">${{ elem.price }}</div>
+                                    </div>
+                                </div>
+                                <div class="ProductCard-cart">
+                                    <div class="ProductCard-cartElement">
+                                        <a class="btn btn_primary" onclick="add_to_cart('{{ elem.pk }}')">
+                                            <img class="btn-icon" src="{{ static('assets/img/icons/card/cart_white.svg') }}"
+                                                alt="cart_white.svg">
+                                            <span class="btn-content">Добавить в корзину</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="Product Product-compare" style="color: red">недостаточно товаров для сравнения</div>
+            {% endif %}
+            </div>
+    </div>
+<script src="{{ static('assets/js/compare/compare.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,71 @@
+<footer class="Footer">
+    <div class="wrap">
+        <div class="row Footer-main">
+            <div class="row-block">
+                <a class="logo Footer-logo" href="{{ url('index') }}">
+                    <img class="logo-image"
+                         src="{{ static('assets/img/logo_footer.png') }}"
+                         alt="logo_footer.png" />
+                </a>
+            </div>
+            <div class="row-block">
+                <strong class="Footer-title">Навигация</strong>
+                <ul class="menu menu_vt Footer-menu">
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{ url('index') }}">Главная</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{ url('products:catalog') }}">Каталог</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{ url('products:product_compare') }}">Сравнение</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="menu-item">
+                            <a class="menu-link" href="{{ url('account:account') }}">Профиль</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="row-block">
+                <strong class="Footer-title">Контакты</strong>
+                <ul class="menu menu_vt Footer-menu">
+                    <li class="menu-item">
+                        Phone: <a class="menu-link" href="tel:+8800200600">8-800-200-600</a>
+                    </li>
+                    <li class="menu-item">
+                        Email: <a class="menu-link" href="mailto:xxx@meg.com">xxx@meg.com</a>
+                    </li>
+                </ul>
+                <br>
+                <ul class="menu menu_img menu_smallImg Footer-menuSoc">
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{{ static('assets/img/icons/socialFooter/fb.svg') }}" alt="fb.svg" />
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{{ static('assets/img/icons/socialFooter/tw.svg') }}" alt="tw.svg" />
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{{ static('assets/img/icons/socialFooter/in.svg') }}" alt="in.svg" />
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{{ static('assets/img/icons/socialFooter/pt.svg') }}" alt="pt.svg" />
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{{ static('assets/img/icons/socialFooter/mail.svg') }}" alt="mail.svg" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,66 @@
+{% block extra_css %}
+    <link href="{{ static('assets/css/review.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="Tabs-block" id="reviews" style="">
+        <header class="Section-header">
+            <h3 class="Section-title">
+                {{ get_count_review.1 }}
+            </h3>
+        </header>
+        <div class="Comments">
+            {% for review in reviews %}
+                <div class="Comment">
+                    <div class="Comment-column Comment-column_pict">
+                        {% if review.author.avatar %}
+                            <img src="{{ review.author.avatar.url }}" alt="Avatar" class="Comment-avatar-image">
+                        {% else %}
+                        <div class="Comment-avatar">
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="Comment-column">
+                        <header class="Comment-header">
+                            <div>
+                                <strong class="Comment-title">
+                                    {{ review.author.first_name + ' ' + review.author.last_name }}
+                                </strong>
+                                <span class="Comment-date">
+                                    {{ review.created_at.strftime('%d %B %Y / %H:%M') }}
+                                </span>
+                            </div>
+                        </header>
+                        <div class="Comment-content">
+                            {{ review.text }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="Comment-more">
+                <button class="btn-more btn btn_muted" id="btn-more">Показать еще</button>
+            </div>
+        </div>
+        <header class="Section-header Section-header_product">
+            <h3 class="Section-title">
+                Добавить отзыв
+            </h3>
+        </header>
+        <div class="Tabs-addComment">
+            <form class="form" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-textarea" name="text" id="id_text" placeholder="Отзыв"></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn_muted" type="submit">
+                        Отправить отзыв
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{ static('assets/js/review.js') }}"></script>
+
+{% endblock %}

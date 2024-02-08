@@ -1,0 +1,21 @@
+<table>
+<tbody>
+<tr>
+    <th class="hed">Характеристика</th>
+    <th class="hed">Значение</th>
+</tr>
+{% for product_property in elem.property %}
+    {% if product_property.property_name in not_dif_category %}
+         <tr>
+             <td class="comparis">{{ product_property.property_name }}</td>
+             <td class="comparis">{{ product_property.property_value }}</td>
+         </tr>
+    {% else %}
+        <tr>
+             <td>{{ product_property.property_name }}</td>
+             <td>{{ product_property.property_value }}</td>
+         </tr>
+    {% endif %}
+ {% endfor %}
+</tbody>
+</table>

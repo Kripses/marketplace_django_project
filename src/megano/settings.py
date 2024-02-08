@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import sys
 from pathlib import Path
+
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +28,13 @@ SECRET_KEY = "django-insecure-ew#o(-glp(5b906c3k1o&syu&e+*-k-hvke=3*x)icr%@u-h&o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'nice-kids-float.loca.lt',
+]
 
 
+AUTH_USER_MODEL = 'account.Profile'
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +45,17 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'django_jinja',
+    'django_cleanup.apps.CleanupConfig',
+    'rest_framework',
+    'django_filters',
+
+    'account.apps.AccountConfig',
+    'adminsettings.apps.AdminsettingsConfig',
+    'payments.apps.PaymentsConfig',
+    'products.apps.ProductsConfig',
+    'catalog.apps.CatalogConfig',
+    'cart.apps.CardConfig',
+    'discounts.apps.DiscountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -65,7 +83,14 @@ TEMPLATES = [
             "constants": {
             },
             'globals': {
-            }
+            },
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'products.context_processors.header_menu',
+            ],
         },
     },
     {
@@ -78,6 +103,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'products.context_processors.header_menu',
             ],
         },
     },
@@ -132,8 +158,51 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "static/"
+if sys.argv[1] != 'runserver':
+    STATIC_ROOT = BASE_DIR / 'static'
+else:
+    STATICFILES_DIRS = [BASE_DIR / 'static']
+
+FOLDER_FIXTURES = BASE_DIR / 'fixtures'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_REDIRECT_URL = reverse_lazy("account:profile")
+LOGIN_URL = reverse_lazy("account:login")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": "/var/tmp/django_cache",
+        "TIMEOUT": 600,
+    }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
+
+IMPORT_DIR = BASE_DIR / 'imports'
+IMPORT_PENDING_DIR = IMPORT_DIR / 'pending'
+IMPORT_SUCCESS_DIR = IMPORT_DIR / 'success'
+IMPORT_FAILURE_DIR = IMPORT_DIR / 'failure'
+IMPORT_LOGS_DIR = IMPORT_DIR / 'logs'
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_ADMIN_EMAIL = 'admin@megano.com'
+DEFAULT_FROM_EMAIL = 'admin@megano.com'

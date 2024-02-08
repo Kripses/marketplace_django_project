@@ -1,0 +1,47 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+  Registration
+{% endblock %}
+
+{% block header %}
+  {% include 'common/header_min.jinja2' %}
+{% endblock %}
+
+{% block content %}
+    <link href="{{ static('assets/css/profile_style.css') }}" rel="stylesheet">
+
+    <div class="wrap">
+        <div class="wrapper">
+            <div class="header">
+                <h3 class="sign-in">Регистрация</h3>
+
+            </div>
+            <div class="clear"></div>
+
+            <form method="POST">
+                {% csrf_token %}
+                <div>
+                    <input class="user-input" type="text" name="full_name" id="full_name" placeholder="Имя" required>
+                </div>
+                <div>
+                    <input class="user-input" type="email" name="email" id="email" placeholder="E-mail" required autofocus>
+                </div>
+                <br>
+                <div>
+                    <input type="password" name="password1" id="password1" placeholder="Пароль" required>
+                </div>
+                <div>
+                    <input type="password" name="password2" id="password2" placeholder="Подтверждение пароля" required>
+                </div>
+                <input type="submit" value="Зарегистрироваться" />
+                <a class="registr" href="{{ url('account:login') }}">Вход</a>
+{#                <div class="clear"></div>#}
+
+                <div class='error_text'>{{ form.errors }}</div>
+            </form>
+        </div>
+
+    </div>
+
+{% endblock %}

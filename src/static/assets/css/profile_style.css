@@ -1,0 +1,74 @@
+.alert-danger, .alert-success {
+    position: absolute;
+    left: 35%;
+    bottom: 46%;
+    z-index: 10;
+    margin: 0 auto;
+    width: 30%;
+    height: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /*font-size: x-large;*/
+    color: red;
+    background-color: #fff;
+    border: 2px solid red;
+/*    background: #BFE2FF;*/
+    border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
+    box-shadow: 15px 15px 50px rgba(0,0,0,0.2);
+    animation: anim-ramka-1 10s infinite;
+    font-size: max(15px, min(calc((100vw - 480px)/(1280 - 480) * (24 - 16) + 16px), 26px));
+    font-family: 'Roboto', sans-serif;
+}
+@keyframes anim-ramka-1 {
+    0% {
+        border-radius: 30% 70% 70% 30%/30% 30% 70% 70%;
+        box-shadow: 15px 15px 50px rgba(0,0,0,0.2);
+    }
+    25% {
+        border-radius: 58% 42% 75% 25%/76% 46% 54% 24%;
+    }
+    50% {
+        border-radius: 50% 50% 33% 67%/55% 27% 73% 45%;
+        box-shadow: -10px -5px 50px rgba(0,0,0,0.2);
+    }
+    75% {
+        border-radius: 33% 67% 58% 42%/63% 68% 32% 37%;
+    }
+}
+.alert-success {
+    left: 30%;
+    width: 40%  ;
+    color: green;
+    border-color: greenyellow;
+}
+.error, .error_text {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.error_text {
+    animation: fade-out 10s;
+    opacity: 0;
+    position: absolute;
+    bottom: -50%;
+}
+
+.messages li {
+    animation: fade-out 4s;
+    opacity: 0;
+    text-align: end;
+}
+
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

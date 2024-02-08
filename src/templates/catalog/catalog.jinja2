@@ -1,0 +1,217 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+    Megano
+{% endblock %}
+
+{% block header %}
+    {% include 'common/header_full.jinja2' %}
+{% endblock %}
+
+{% block content %}
+<div class="Middle Middle_top">
+    <div class="Section Section_column Section_columnLeft">
+        <div class="wrap">
+            <div class="Section-column">
+                <div class="Section-columnSection">
+                    <header class="Section-header">
+                        <strong class="Section-title">Фильтр
+                        </strong>
+                    </header>
+                    <div class="Section-columnContent">
+                        {% if filter_form %}
+                            <form class="form" action="?" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="range Section-columnRange">
+                                        {{ filter_form.price }}
+                                        <div class="range-price">Цена:&#32;
+                                            <div class="rangePrice">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        {{ filter_form.title }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="toggle">
+                                            {{ filter_form.in_stock }}
+                                            <span class="toggle-box"></span><span class="toggle-text">Только товары в наличии</span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="buttons">
+                                            <input class="btn btn_square btn_dark btn_narrow" type="submit" value="Фильтр">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="Section-columnSection">
+                        <header class="Section-header">
+                            <strong class="Section-title">Популярные тэги
+                            </strong>
+                        </header>
+                        <div class="Section-columnContent">
+                            <div class="buttons">
+                                {% for tag in tags %}
+                                    <a class="btn btn_default btn_sm" href="{{ tag.get_absolute_url() }}">{{ tag.name }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="Section-content">
+                <div class="Sort">
+                        <div class="Sort-title">Сортировать по:
+                        </div>
+                        <div class="Sort-variants">
+                            <a class="Sort-sortBy {% if curr_sort and curr_sort == sort.POP_ASC.value %}
+Sort-sortBy_inc
+                                                  {% elif curr_sort and curr_sort == sort.POP_DEC.value %}
+Sort-sortBy_dec
+                                                  {% endif %}"
+                               href="?sort={% if curr_sort and curr_sort == sort.POP_ASC.value %}
+{{ sort.POP_DEC.value }}
+                                           {% elif curr_sort and curr_sort == sort.POP_DEC.value %}
+{{ sort.NONE.value }}
+                                           {% else %}
+{{ sort.POP_ASC.value }}
+                                           {% endif %}">
+                                Популярности
+                            </a>
+                            <a class="Sort-sortBy {% if curr_sort and curr_sort == sort.PRI_ASC.value %}
+Sort-sortBy_inc
+                                                  {% elif curr_sort and curr_sort == sort.PRI_DEC.value %}
+Sort-sortBy_dec
+                                                  {% endif %}"
+                               href="?sort={% if curr_sort and curr_sort == sort.PRI_DEC.value %}
+{{ sort.PRI_ASC.value }}
+                                           {% elif curr_sort and curr_sort == sort.PRI_ASC.value %}
+{{ sort.NONE.value }}
+                                           {% else %}
+{{ sort.PRI_DEC.value }}
+                                           {% endif %}">
+                                Цене
+                            </a>
+                            <a class="Sort-sortBy {% if curr_sort and curr_sort == sort.REV_ASC.value %}
+Sort-sortBy_inc
+                                                  {% elif curr_sort and curr_sort == sort.REV_DEC.value %}
+Sort-sortBy_dec
+                                                  {% endif %}"
+                               href="?sort={% if curr_sort and curr_sort == sort.REV_ASC.value %}
+{{ sort.REV_DEC.value }}
+                                           {% elif curr_sort and curr_sort == sort.REV_DEC.value %}
+{{ sort.NONE.value }}
+                                           {% else %}
+{{ sort.REV_ASC.value }}
+                                           {% endif %}">
+                                Отзывам
+                            </a>
+                            <a class="Sort-sortBy {% if curr_sort and curr_sort == sort.CRE_ASC.value %}
+Sort-sortBy_inc
+                                                  {% elif curr_sort and curr_sort == sort.CRE_DEC.value %}
+Sort-sortBy_dec
+                                                  {% endif %}"
+                               href="?sort={% if curr_sort and curr_sort == sort.CRE_ASC.value %}
+{{ sort.CRE_DEC.value }}
+                                           {% elif curr_sort and curr_sort == sort.CRE_DEC.value %}
+{{ sort.NONE.value }}
+                                           {% else %}
+{{ sort.CRE_ASC.value }}
+                                           {% endif %}">
+                                Новизне
+                            </a>
+                        </div>
+                    </div>
+                <div class="Cards">
+                    {% for product in products %}
+                        <div class="Card">
+                            {% with picture = product.images.first() %}
+                                {% if picture %}
+                                    <a class="Card-picture" href="{{ product.get_absolute_url() }}">
+                                        <img src="{{ picture.image.url }}" alt="Product image" />
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <div class="Card-content">
+                                <strong class="Card-title">
+                                    <a href="{{ product.get_absolute_url() }}">{{ product.name }}</a>
+                                </strong>
+                                <div class="Card-description">
+                                    {% with regular_price = product.average_price, discounted_price = product.discounted_average_price %}
+                                        <div class="Card-cost">
+                                            {% if discounted_price > 0 %}
+                                                {% if regular_price != discounted_price %}
+                                                    <span class="Card-priceOld">${{ regular_price }}</span>
+                                                {% endif %}
+                                                <span class="Card-price">${{ discounted_price }}</span>
+                                            {% else %}
+                                                <span class="Card-priceOutOfStock">Нет в наличии</span>
+                                            {% endif %}
+                                        </div>
+                                        <div class="Card-category">
+                                            {{ product.category.full_name }}
+                                        </div>
+                                        {% if discounted_price > 0 %}
+                                            <div class="Card-hover">
+                                                <a class="Card-btn" onclick="add_to_cart('{{ product.pk }}')">
+                                                    <img src="{{ static('assets/img/icons/card/cart.svg') }}" alt="cart.svg" />
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    {% endwith %}
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        Не найдено продуктов для отображения.
+                    {% endfor %}
+                </div>
+                {% if products.has_other_pages() %}
+                    <div class="Pagination">
+                        <div class="Pagination-ins">
+                            {% if products.has_previous() %}
+                                <a class="Pagination-element Pagination-element_prev" href="?p={{ products.previous_page_number() }}">
+                                    <img src="{{ static('assets/img/icons/prevPagination.svg') }}"  alt="prevPagination.svg" />
+                                </a>
+                            {% endif %}
+
+                            {% if products.has_previous() and products.has_next() %}
+                                {% set start = products.number - 2 %}
+                                {% set end = products.number + 1 %}
+                            {% elif products.has_previous() %}
+                                {% set start = ([products.number - 3, 0]|max) %}
+                                {% set end = products.number %}
+                            {% else %}
+                                {% set start = products.number - 1 %}
+                                {% set end = products.number + 2 %}
+                            {% endif %}
+
+                            {% for page_num in products.paginator.page_range[start:end] %}
+                                {% if page_num == products.number %}
+                                    <span class="Pagination-element Pagination-element_current">
+                                        <span class="Pagination-text">{{ page_num }}</span>
+                                    </span>
+                                {% else %}
+                                    <a class="Pagination-element" href="?p={{ page_num }}">
+                                        <span class="Pagination-text">{{ page_num }}</span>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if products.has_next() %}
+                                <a class="Pagination-element Pagination-element_prev" href="?p={{ products.next_page_number() }}">
+                                    <img src="{{ static('assets/img/icons/nextPagination.svg') }}" alt="nextPagination.svg" />
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

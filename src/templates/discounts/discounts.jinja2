@@ -1,0 +1,108 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+    Megano
+{% endblock %}
+
+{% block header %}
+    {% include 'common/header_full.jinja2' %}
+{% endblock %}
+
+{% block content %}
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item">
+                            <a href="{{ url('index') }}">Главная</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section">
+            <div class="wrap">
+                <div class="Cards Cards_blog">
+                    {% for discount in discounts %}
+                        <div class="Card">
+                            <a class="Card-picture" href="{{ discount.get_absolute_url() }} ">
+                                <img src="{% if discount.image %}
+                                            {{ discount.image.url }}
+                                          {% else %}
+                                            {{ static('assets/img/content/sale/product.png') }}
+                                          {% endif %}
+                                        "
+                                     alt="Sale image" />
+                            </a>
+                            {% if discount.start %}
+                            <div class="Card-date">
+                                <strong class="Card-date-number">{{ discount.start.day }}</strong>
+                                <span class="Card-date-month">{{ discount.start.strftime('%b') }}</span>
+                            </div>
+                            <div class="Card-date Card-date_to">
+                                <strong class="Card-date-number">{{ discount.end.day }}</strong>
+                                <span class="Card-date-month">{{ discount.end.strftime('%b') }}</span>
+                            </div>
+                            {% else %}
+                            <div class="Card-date Card-date">
+                                <strong class="Card-date-number">{{ discount.end.day }}</strong>
+                                <span class="Card-date-month">{{ discount.end.strftime('%b') }}</span>
+                            </div>
+                            {% endif %}
+                            <div class="Card-content">
+                                <strong class="Card-title">
+                                    <a href="#">
+                                        {{ discount.name }}
+                                    </a>
+                                </strong>
+                                <div class="Card-description">
+                                    {{ discount.description }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="Pagination">
+            <div class="Pagination-ins">
+                {% if discounts.has_previous() %}
+                    <a class="Pagination-element Pagination-element_prev" href="?p={{ discounts.previous_page_number() }}">
+                        <img src="{{ static('assets/img/icons/prevPagination.svg') }}"  alt="prevPagination.svg" />
+                    </a>
+                {% endif %}
+
+                {% if discounts.has_previous() and discounts.has_next() %}
+                    {% set start = discounts.number - 2 %}
+                    {% set end = discounts.number + 1 %}
+                {% elif discounts.has_previous() %}
+                    {% set start = ([discounts.number - 3, 0]|max) %}
+                    {% set end = discounts.number %}
+                {% else %}
+                    {% set start = discounts.number - 1 %}
+                    {% set end = discounts.number + 2 %}
+                {% endif %}
+
+                {% for page_num in discounts.paginator.page_range[start:end] %}
+                    {% if page_num == discounts.number %}
+                        <span class="Pagination-element Pagination-element_current">
+                            <span class="Pagination-text">{{ page_num }}</span>
+                        </span>
+                    {% else %}
+                        <a class="Pagination-element" href="?p={{ page_num }}">
+                            <span class="Pagination-text">{{ page_num }}</span>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if discounts.has_next() %}
+                    <a class="Pagination-element Pagination-element_prev" href="?p={{ discounts.next_page_number() }}">
+                        <img src="{{ static('assets/img/icons/nextPagination.svg') }}" alt="nextPagination.svg" />
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

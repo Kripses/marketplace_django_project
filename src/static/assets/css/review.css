@@ -1,0 +1,16 @@
+.Comment:not(:nth-child(-n+3)) {
+    display: none;
+}
+
+.Comment-more {
+    text-align: center;
+    padding-top: 25px;
+}
+
+.visible:nth-child(n) {
+    display: flex;
+}
+
+.non-visible {
+    display: none;
+}

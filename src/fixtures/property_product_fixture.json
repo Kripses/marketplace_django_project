@@ -1,0 +1,266 @@
+[
+  {
+    "model": "products.property",
+    "pk": 1,
+    "fields": {
+      "category": 7,
+      "name": "Производитель"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 2,
+    "fields": {
+      "category": 7,
+      "name": "Экран"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 3,
+    "fields": {
+      "category": 7,
+      "name": "Процессор"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 4,
+    "fields": {
+      "category": 7,
+      "name": "Память"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 5,
+    "fields": {
+      "category": 7,
+      "name": "Видеокарта"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 6,
+    "fields": {
+      "category": 7,
+      "name": "Версия ОС"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 7,
+    "fields": {
+      "category": 9,
+      "name": "Производитель"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 8,
+    "fields": {
+      "category": 9,
+      "name": "Экран"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 9,
+    "fields": {
+      "category": 9,
+      "name": "Память"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 10,
+    "fields": {
+      "category": 9,
+      "name": "Фото"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 11,
+    "fields": {
+      "category": 9,
+      "name": "Аккумулятор"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 12,
+    "fields": {
+      "category": 9,
+      "name": "Процессор"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 13,
+    "fields": {
+      "category": 5,
+      "name": "Тип устройства"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 14,
+    "fields": {
+      "category": 5,
+      "name": "Конструкция"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 15,
+    "fields": {
+      "category": 5,
+      "name": "Система активного шумоподавления"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 16,
+    "fields": {
+      "category": 5,
+      "name": "Разъем штекера"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 17,
+    "fields": {
+      "category": 5,
+      "name": "Производитель"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 18,
+    "fields": {
+      "category": 4,
+      "name": "Производитель"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 19,
+    "fields": {
+      "category": 4,
+      "name": "Экран"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 20,
+    "fields": {
+      "category": 4,
+      "name": "Частота обновления"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 21,
+    "fields": {
+      "category": 4,
+      "name": "Поддержка Smart TV"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 22,
+    "fields": {
+      "category": 4,
+      "name": "Встроенный модуль Bluetooth"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 23,
+    "fields": {
+      "category": 6,
+      "name": "Производитель"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 24,
+    "fields": {
+      "category": 6,
+      "name": "Габаритные размеры"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 25,
+    "fields": {
+      "category": 6,
+      "name": "Мотор"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 26,
+    "fields": {
+      "category": 6,
+      "name": "Максимальная загрузка"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 27,
+    "fields": {
+      "category": 8,
+      "name": "Производитель"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 28,
+    "fields": {
+      "category": 8,
+      "name": "Подсветка кнопок"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 29,
+    "fields": {
+      "category": 8,
+      "name": "Тип клавиш"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 30,
+    "fields": {
+      "category": 8,
+      "name": "Объем"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 31,
+    "fields": {
+      "category": 8,
+      "name": "Интерфейс подключения"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 32,
+    "fields": {
+      "category": 8,
+      "name": "Тип мыши"
+    }
+  },
+  {
+    "model": "products.property",
+    "pk": 33,
+    "fields": {
+      "category": 8,
+      "name": "Оптическое разрешение"
+    }
+  }
+]

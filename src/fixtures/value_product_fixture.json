@@ -1,0 +1,731 @@
+[
+  {
+    "model": "products.value",
+    "pk": 1,
+    "fields": {
+      "product": 2,
+      "property": 1,
+      "value": "Dell"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 2,
+    "fields": {
+      "product": 2,
+      "property": 2,
+      "value": "14\" (1920x1080), 60 Гц"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "property": 3,
+      "value": "Intel Core i5 1135G7 (4x2.40 ГГц)"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "property": 4,
+      "value": "оперативная 16 ГБ (4266 МГц), SSD 256 ГБ"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 5,
+    "fields": {
+      "product": 2,
+      "property": 5,
+      "value": "Intel Iris Xe Graphics"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 6,
+    "fields": {
+      "product": 2,
+      "property": 6,
+      "value": "Windows 10 Pro"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 7,
+    "fields": {
+      "product": 1,
+      "property": 7,
+      "value": "Samsung"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 8,
+    "fields": {
+      "product": 1,
+      "property": 8,
+      "value": "6.8\" (3088x1440) Dynamic AMOLED 2X 120 Гц"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 9,
+    "fields": {
+      "product": 1,
+      "property": 9,
+      "value": "встроенная 1 ТБ, оперативная 12 ГБ"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 10,
+    "fields": {
+      "product": 1,
+      "property": 10,
+      "value": "4 камеры, основная 200 МП"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 11,
+    "fields": {
+      "product": 1,
+      "property": 11,
+      "value": "5000 мА·ч"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 12,
+    "fields": {
+      "product": 1,
+      "property": 12,
+      "value": "Qualcomm Snapdragon 8 Gen2"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 13,
+    "fields": {
+      "product": 3,
+      "property": 8,
+      "value": "6.7\" (2796x1290) OLED 120 Гц"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 14,
+    "fields": {
+      "product": 3,
+      "property": 9,
+      "value": "встроенная 256 ГБ"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 15,
+    "fields": {
+      "product": 3,
+      "property": 10,
+      "value": "3 камеры, основная 48 МП"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 16,
+    "fields": {
+      "product": 3,
+      "property": 12,
+      "value": "Apple A17 Pro"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 17,
+    "fields": {
+      "product": 3,
+      "property": 11,
+      "value": "4499 мА⋅ч"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 18,
+    "fields": {
+      "product": 4,
+      "property": 13,
+      "value": "беспроводные TWS-наушники"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 19,
+    "fields": {
+      "product": 4,
+      "property": 14,
+      "value": "внутриканальные"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 20,
+    "fields": {
+      "product": 4,
+      "property": 15,
+      "value": "есть"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 21,
+    "fields": {
+      "product": 4,
+      "property": 16,
+      "value": "USB Type-C"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 22,
+    "fields": {
+      "product": 4,
+      "property": 17,
+      "value": "Samsung"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 23,
+    "fields": {
+      "product": 5,
+      "property": 13,
+      "value": "беспроводные наушники"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 24,
+    "fields": {
+      "product": 5,
+      "property": 14,
+      "value": "внутриканальные"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 25,
+    "fields": {
+      "product": 5,
+      "property": 15,
+      "value": "есть"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 26,
+    "fields": {
+      "product": 5,
+      "property": 16,
+      "value": "USB-C"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 27,
+    "fields": {
+      "product": 5,
+      "property": 17,
+      "value": "Apple"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 28,
+    "fields": {
+      "product": 6,
+      "property": 1,
+      "value": "Xiaomi"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 29,
+    "fields": {
+      "product": 6,
+      "property": 2,
+      "value": "15.6\" (1920x1080) TN, 60 Гц"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 30,
+    "fields": {
+      "product": 6,
+      "property": 3,
+      "value": "Intel Core i3 1115G4 (2x3 ГГц)"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 31,
+    "fields": {
+      "product": 6,
+      "property": 4,
+      "value": "оперативная 8 ГБ (3200 МГц), SSD 256 ГБ"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 32,
+    "fields": {
+      "product": 6,
+      "property": 5,
+      "value": "Intel UHD Graphics"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 33,
+    "fields": {
+      "product": 6,
+      "property": 6,
+      "value": "Windows 11 Home"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 34,
+    "fields": {
+      "product": 7,
+      "property": 18,
+      "value": "Samsung"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 35,
+    "fields": {
+      "product": 7,
+      "property": 19,
+      "value": "75\"/3840x2160 Пикс"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 36,
+    "fields": {
+      "product": 7,
+      "property": 20,
+      "value": "60 Гц"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 37,
+    "fields": {
+      "product": 7,
+      "property": 21,
+      "value": "да"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 38,
+    "fields": {
+      "product": 7,
+      "property": 22,
+      "value": "да"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 39,
+    "fields": {
+      "product": 8,
+      "property": 18,
+      "value": "TCL"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 40,
+    "fields": {
+      "product": 8,
+      "property": 19,
+      "value": "65\"/3840x2160 Пикс"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 41,
+    "fields": {
+      "product": 8,
+      "property": 20,
+      "value": "144 Гц"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 42,
+    "fields": {
+      "product": 8,
+      "property": 21,
+      "value": "Да"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 43,
+    "fields": {
+      "product": 8,
+      "property": 22,
+      "value": "Да"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 44,
+    "fields": {
+      "product": 9,
+      "property": 23,
+      "value": "Gorenje"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 45,
+    "fields": {
+      "product": 9,
+      "property": 24,
+      "value": "85*59.7*43.5 см"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 46,
+    "fields": {
+      "product": 9,
+      "property": 25,
+      "value": "инверторный"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 47,
+    "fields": {
+      "product": 9,
+      "property": 26,
+      "value": "7 кг"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 48,
+    "fields": {
+      "product": 10,
+      "property": 23,
+      "value": "Beko"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 49,
+    "fields": {
+      "product": 10,
+      "property": 24,
+      "value": "84*60*49 см"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 50,
+    "fields": {
+      "product": 10,
+      "property": 25,
+      "value": "инверторный"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 51,
+    "fields": {
+      "product": 10,
+      "property": 26,
+      "value": "7 кг"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 52,
+    "fields": {
+      "product": 11,
+      "property": 1,
+      "value": "MSI"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 53,
+    "fields": {
+      "product": 11,
+      "property": 2,
+      "value": "17.3\"/1920x1080 пикс."
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 54,
+    "fields": {
+      "product": 11,
+      "property": 3,
+      "value": "Intel Core i5 12450H 2 ГГц"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 55,
+    "fields": {
+      "product": 11,
+      "property": 4,
+      "value": "оперативная 16 ГБ, SSD 512 ГБ"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 56,
+    "fields": {
+      "product": 11,
+      "property": 5,
+      "value": "GeForce RTX 4060 8GB"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 57,
+    "fields": {
+      "product": 11,
+      "property": 6,
+      "value": "Windows 11 Home"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 58,
+    "fields": {
+      "product": 12,
+      "property": 1,
+      "value": "Apple"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 59,
+    "fields": {
+      "product": 12,
+      "property": 2,
+      "value": "15.3\"/2880x1864 пикс."
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 60,
+    "fields": {
+      "product": 12,
+      "property": 3,
+      "value": "Apple M2"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 61,
+    "fields": {
+      "product": 12,
+      "property": 4,
+      "value": "оперативная 8 ГБ, SSD 256 ГБ"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 62,
+    "fields": {
+      "product": 12,
+      "property": 5,
+      "value": "Apple"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 63,
+    "fields": {
+      "product": 12,
+      "property": 6,
+      "value": "Apple"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 64,
+    "fields": {
+      "product": 13,
+      "property": 1,
+      "value": "Samsung"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 65,
+    "fields": {
+      "product": 13,
+      "property": 2,
+      "value": "16\"/2880x1800 пикс."
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 66,
+    "fields": {
+      "product": 13,
+      "property": 3,
+      "value": "Intel Core i5 1340P 1.9 ГГц"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 67,
+    "fields": {
+      "product": 13,
+      "property": 4,
+      "value": "оперативная 16 ГБ, SSD 512 ГБ"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 68,
+    "fields": {
+      "product": 13,
+      "property": 5,
+      "value": "Intel Iris Xe Graphics"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 69,
+    "fields": {
+      "product": 13,
+      "property": 6,
+      "value": "Windows 11 Home"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 70,
+    "fields": {
+      "product": 14,
+      "property": 27,
+      "value": "Logitech"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 71,
+    "fields": {
+      "product": 14,
+      "property": 28,
+      "value": "RGB"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 72,
+    "fields": {
+      "product": 14,
+      "property": 29,
+      "value": "механические"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 73,
+    "fields": {
+      "product": 15,
+      "property": 27,
+      "value": "Ducky"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 74,
+    "fields": {
+      "product": 15,
+      "property": 28,
+      "value": "RGB"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 75,
+    "fields": {
+      "product": 15,
+      "property": 29,
+      "value": "механические"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 76,
+    "fields": {
+      "product": 16,
+      "property": 27,
+      "value": "Samsung"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 77,
+    "fields": {
+      "product": 16,
+      "property": 30,
+      "value": "250Гб"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 78,
+    "fields": {
+      "product": 16,
+      "property": 31,
+      "value": "SATA III"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 79,
+    "fields": {
+      "product": 17,
+      "property": 27,
+      "value": "Logitech"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 80,
+    "fields": {
+      "product": 17,
+      "property": 32,
+      "value": "оптическая"
+    }
+  },
+  {
+    "model": "products.value",
+    "pk": 81,
+    "fields": {
+      "product": 17,
+      "property": 33,
+      "value": "1000 т/д"
+    }
+  }
+]

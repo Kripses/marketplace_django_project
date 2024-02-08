@@ -1,0 +1,15 @@
+[
+{
+  "model": "adminsettings.sitesettings",
+  "pk": 5,
+  "fields": {
+    "reviews_count": 10,
+    "products_per_page": 20,
+    "delivery_cost": 100,
+    "express_delivery_cost": 600,
+    "discount_percentage": 0,
+    "products_images": 3,
+    "amount_products_from_the_seller": 20
+  }
+}
+]

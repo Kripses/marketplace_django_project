@@ -1,0 +1,63 @@
+<div class="Header-searchWrap">
+    <div class="wrap">
+        <div class="Header-categories">
+            <div class="CategoriesButton">
+                <div class="CategoriesButton-title">
+                    <div class="CategoriesButton-icon">
+                        <img src="{{ static('assets/img/icons/allDep.svg') }}"
+                             alt="allDep.svg" />
+                    </div><span class="CategoriesButton-text">Все категории</span>
+                    <div class="CategoriesButton-arrow">
+                    </div>
+                </div>
+                <div class="CategoriesButton-content">
+                    {% for category in categories %}
+                        <div class="CategoriesButton-link">
+                            <a href="{{ category.absolute_url }}">
+                                <div class="CategoriesButton-icon">
+                                    {% if category.icon_url %}
+                                        <img src="{{ category.icon_url }}"
+                                        alt="{{ category.icon_url }}"/>
+                                    {% endif %}
+                                </div>
+                                <span class="CategoriesButton-text">{{ category.name }}</span>
+                            </a>
+                            {% with subcategories = category.subcategories %}
+                                {% if subcategories %}
+                                    <a class="CategoriesButton-arrow" href="#"></a>
+                                    <div class="CategoriesButton-submenu">
+                                        {% for subcategory in subcategories %}
+                                            <a href="{{ subcategory.absolute_url }}">
+                                                <div class="CategoriesButton-icon">
+                                                    {% if subcategory.icon_url %}
+                                                        <img src="{{ subcategory.icon_url }}"
+                                                        alt="subcategory.icon_url"/>
+                                                    {% endif %}
+                                                </div>
+                                                <span class="CategoriesButton-text">{{ subcategory.name }}</span>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="Header-searchLink">
+            <img src="{{ static('assets/img/icons/search.svg') }}" alt="search.svg" />
+        </div>
+        <div class="Header-search">
+            <div class="search">
+                <form class="form form_search" action="{{ url('products:catalog') }}" method="post">
+                    {% csrf_token %}
+                    <input class="search-input" id="query" name="query" type="text" placeholder="NVIDIA GeForce RTX 3060" />
+                    <button class="search-button" type="submit" name="search" id="search">
+                        <img src="{{ static('assets/img/icons/search.svg') }}" alt="search.svg" />Поиск
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

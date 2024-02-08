@@ -1,0 +1,178 @@
+[
+  {
+    "model": "products.picture",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "image": "products/images/product_1/hqdefault.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "image": "products/images/product_1/4965838198cc719228dd.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 3,
+    "fields": {
+      "product": 2,
+      "image": "products/images/product_2/DELL-Latitude-7520-i7-1165G7-16-512SSD-FHD-W11p_2YRrCy3.jpeg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 4,
+    "fields": {
+      "product": 2,
+      "image": "products/images/product_2/76078188_GFx3Y0u.jpeg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 5,
+    "fields": {
+      "product": 3,
+      "image": "products/images/product_3/IMG_4433.jpeg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 6,
+    "fields": {
+      "product": 4,
+      "image": "products/images/product_4/61nCHwBDqOL.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 7,
+    "fields": {
+      "product": 4,
+      "image": "products/images/product_4/13-16.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 8,
+    "fields": {
+      "product": 5,
+      "image": "products/images/product_5/6415673824.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 9,
+    "fields": {
+      "product": 6,
+      "image": "products/images/product_6/rage-photo-resized-xy_682x1200-f-lbb013bggeseuz0_1f80f4b1-jpg-_lHdpfO6.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 10,
+    "fields": {
+      "product": 7,
+      "image": "products/images/product_7/64e60ddf9326d_full.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 11,
+    "fields": {
+      "product": 8,
+      "image": "products/images/product_8/tcl-65-inch-6-series-4k-uhd-roku-tv.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 12,
+    "fields": {
+      "product": 9,
+      "image": "products/images/product_9/3kii3m1aoy71ve51bq8ewifvf2hftths.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 13,
+    "fields": {
+      "product": 9,
+      "image": "products/images/product_9/UwVCnI2Iljzo3sXe9keaTQ.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 14,
+    "fields": {
+      "product": 10,
+      "image": "products/images/product_10/6726711361.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 15,
+    "fields": {
+      "product": 11,
+      "image": "products/images/product_11/6569692752.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 16,
+    "fields": {
+      "product": 12,
+      "image": "products/images/product_12/6efd6ab0-e5d1-11ec-be6c-b2fe04160b9a.cf.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 17,
+    "fields": {
+      "product": 13,
+      "image": "products/images/product_13/f89dc19ccda968b98bdf8512f8b00d7c.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 18,
+    "fields": {
+      "product": 14,
+      "image": "products/images/product_14/1937573.jpeg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 19,
+    "fields": {
+      "product": 15,
+      "image": "products/images/product_15/2_top-5-manufacturers-of-the-best-mechanical-keyboard-in-the-_gu1hfZi.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 20,
+    "fields": {
+      "product": 15,
+      "image": "products/images/product_15/s-l500.jpg"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 21,
+    "fields": {
+      "product": 16,
+      "image": "products/images/product_16/SAMSUNG-850-EVO-850EVO-250-500-1-250-500-1-2-5-SATA3-SSD.webp"
+    }
+  },
+  {
+    "model": "products.picture",
+    "pk": 22,
+    "fields": {
+      "product": 17,
+      "image": "products/images/product_17/AS71D201031KUA5H.jpg"
+    }
+  }
+]

@@ -1,0 +1,13 @@
+{% extends 'admin/change_list.html' %}
+
+{% block object-tools-items %}
+{% load admin_urls %}
+    {% if user.is_superuser or user.is_staff or perms.products.add_product and perms.products.add_seller_product %}
+        <li>
+            <a href="{% url 'admin:import_products' %}" class="addlink">
+                Import products
+            </a>
+        </li>
+    {% endif %}
+    {{ block.super }}
+{% endblock %}

@@ -1,0 +1,231 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block header %}
+    {% include 'common/header_full.jinja2' %}
+{% endblock %}
+
+{% block content %}
+<body class="Site">
+    <div class="Middle Middle_top">
+        <div class="Section">
+            <div class="wrap">
+                <div class="Product">
+                    <div class="ProductCard">
+                        <div class="ProductCard-look">
+                            <div class="ProductCard-photo">
+                                {% if images %}
+                                    <img src="{{ images.0.image.url }}" alt="{{ images.0.image.name }}" />
+                                {% endif %}
+                            </div>
+                            <div class="ProductCard-picts">
+                                {% for image in images %}
+                                    <a class="ProductCard-pict{% if loop.first %} ProductCard-pict_ACTIVE{% endif %}" href="{{ image.image.url }}">
+                                        <img src="{{ image.image.url }}" alt="{{ image.image.name }}" />
+                                    </a>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <div class="ProductCard-desc">
+                            {% with regular_price = product.min_price, discounted_price = product.discounted_min_price %}
+                            <div class="ProductCard-header">
+                                <h2 class="ProductCard-title">
+                                    {{ product.name }}
+                                </h2>
+                                <div class="ProductCard-info">
+                                    <div class="ProductCard-cost">
+                                        {% if discounted_price > 0 %}
+                                            {% if discounted_price != regular_price %}
+                                                <div class="ProductCard-priceOld">
+                                                    ${{ regular_price }}
+                                                </div>
+                                            {% endif %}
+                                            <div class="ProductCard-price">
+                                                ${{ discounted_price }}
+                                            </div>
+                                        {% else %}
+                                            <div class="ProductCard-priceOutOfStock">
+                                                Нет в наличии.
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ProductCard-text">
+                                {% for paragraph in product.description.split('\n')[:3] %}
+                                <ul>
+                                    <li>{{ paragraph|truncate(100) }}</li>
+                                </ul>
+                                {% endfor %}
+                            </div>
+                            <div class="ProductCard-cart">
+                                {% if discounted_price > 0 %}
+                                    <div class="ProductCard-cartElement ProductCard-cartElement_amount">
+                                        <div class="Amount Amount_product">
+                                            <button class="Amount-remove" type="button">
+                                            </button>
+                                            <input class="Amount-input form-input" name="amount" type="text" value="1" />
+                                            <button class="Amount-add" type="button">
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="ProductCard-cartElement">
+                                        <a class="btn btn_primary" href="#modal_open" onclick="add_to_cart('{{ product.pk }}')">
+                                            <img class="btn-icon" src="{{ static('assets/img/icons/card/cart_white.svg') }}" alt="cart_white.svg" />
+                                            <span class="btn-content">Купить</span>
+                                        </a>
+                                        <button type="submit" class="btn Compare-btn" onclick="add_to_compare('{{ product.slug }}')">
+                                            <img class="btn_icon" src="{{ static('assets/img/icons/link.svg') }}" alt="link.svg">
+                                        </button>
+                                    </div>
+                                    <div id="modal_open" class="my_modal">
+                                        <div class="my_modal-dialog">
+                                            <div class="my_modal-content">
+                                                <div class="my_modal-header">
+                                                    <p class="my_modal-title">Поздравляем!</p>
+                                                    <a href="#" title="Закрыть модальное окно" class="close">×</a>
+                                                </div>
+                                                <div class="my_modal-body">
+                                                    <p>Товар успешно добавлен в корзину!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="ProductCard-footer">
+                                <div class="ProductCard-tags">
+                                    <strong class="ProductCard-tagsTitle">Тэги:
+                                    </strong><a href="#">{{ product.category }}</a>
+                                </div>
+                            </div>
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="Tabs Tabs_default">
+                        <div class="Tabs-links">
+                            <a class="Tabs-link_ACTIVE Tabs-link" href="#description">
+                                <span>Описание</span>
+                            </a>
+                            <a class="Tabs-link" href="#sellers">
+                                <span>Продавцы</span>
+                            </a>
+                            <a class="Tabs-link" href="#addit">
+                                <span>Характеристика</span>
+                            </a>
+                            <a class="Tabs-link" href="#reviews">
+                                <span>Отзывы ({{ reviews|length }})</span>
+                            </a>
+                        </div>
+                        <div class="Tabs-wrap">
+                            <div class="Tabs-block" id="description">
+                                <h2>{{ product.name }}
+                                </h2>
+                                {% for paragraph in product.description.split('\n') %}
+                                <ul>
+                                    <li>{{ paragraph }}</li>
+                                </ul>
+                                {% endfor %}
+                                {% if images %}
+                                    <img class="pict pict_right" src="{{ images.0.image.url }}" alt="{{ images.0.image.name }}" />
+                                {% endif %}
+
+                                <div class="clearfix">
+                                </div>
+                                <div class="table">
+                                    <table>
+                                        <tr>
+                                            <th>Характеристика
+                                            </th>
+                                            <th>Значение
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>Тип устройства
+                                            </td>
+                                            <td>{{ product.category }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="Tabs-block" id="sellers">
+                                <div class="Section-content">
+                                {% for seller in seller_products %}
+                                    {% if seller.count %}
+                                        <div class="Orders">
+                                            <div class="Order Order_anons"
+                                                style="margin-bottom:
+                                                    {% if not loop.last %}
+                                                        40px
+                                                    {% else %}
+                                                        0
+                                                    {% endif %};">
+
+                                                    <div class="Order-personal">
+                                                        <div class="row">
+                                                            <div class="row-block">
+                                                                <a class="Order-title" href="#">
+                                                                    {{ seller.seller.name }}
+                                                                </a>
+                                                                <div class="ProductCard-cartElement" style="margin-top: 10px;">
+                                                                    <a class="btn btn_primary" href="#modal_open" onclick="add_to_cart('{{ product.pk }}', '{{ seller.seller.pk }}')">
+                                                                        <img class="btn-icon" src="{{ static('assets/img/icons/card/cart_white.svg') }}" alt="cart_white.svg" />
+                                                                        <span class="btn-content">Купить</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row-block">
+                                                                <div class="Order-info Order-info_delivery">
+                                                                    <div class="Order-infoType">Тип доставки:
+                                                                    </div>
+                                                                    <div class="Order-infoContent">Обычная доставка
+                                                                    </div>
+                                                                </div>
+                                                                <div class="Order-info Order-info_pay">
+                                                                    <div class="Order-infoType">Оплата:
+                                                                    </div>
+                                                                    <div class="Order-infoContent">Онлайн картой
+                                                                    </div>
+                                                                </div>
+                                                                <div class="Order-info">
+                                                                    <div class="Order-infoType">Стоимость:
+                                                                    </div>
+                                                                    <div class="Order-infoContent">
+                                                                            <span class="Order-price">{{ seller.price }}$</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="Tabs-block" id="addit">
+                                <div class="Product-props">
+                                    {% for property_value in properties %}
+                                        <div class="Product-prop">
+                                            <strong>{{ property_value.property.name }}
+                                            </strong><span> {{ property_value.value }}</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% include 'catalog/review.jinja2' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src='{{ static('assets/js/compare/add_to_compare.js') }}'></script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+    Список заказов
+{% endblock %}
+
+{% block extra_css %}
+    <link href="{{ static('assets/css/extra.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+{% block header %}
+    {% include 'common/header_full.jinja2' %}
+
+{% endblock %}
+
+{% block content %}
+    {% for order in orders %}
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <a href="{{ url('cart:order_detail', order.pk) }}">
+                        <h1 class="Middle-title">Заказ №{{ order.id }} от {{ order.created_at.strftime('%d.%m.%y') }}</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

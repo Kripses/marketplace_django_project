@@ -1,0 +1,232 @@
+[
+  {
+    "model": "discounts.productdiscount",
+    "pk": 1,
+    "fields": {
+      "start": null,
+      "end": "2024-12-28T06:54:38Z",
+      "active": true,
+      "weight": 0,
+      "name": "Apple iPhone 15 Pro Max 256GB",
+      "slug": "apple-iphone-15-pro-max-256gb",
+      "description": "Успевай урвать Apple iPhone 15 Pro Max 256GB на 15% дешевле!",
+      "discount_type": "PRCNT",
+      "value": "15.00",
+      "image": "",
+      "products": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "discounts.productdiscount",
+    "pk": 2,
+    "fields": {
+      "start": "2023-12-22T13:26:32Z",
+      "end": "2024-12-28T07:26:26Z",
+      "active": true,
+      "weight": 0,
+      "name": "Наушники Apple AirPods Pro",
+      "slug": "naushniki-apple-airpods-pro",
+      "description": "Сэкономь $3.00 припокупке Apple AirPods Pro!",
+      "discount_type": "FXVAL",
+      "value": "3.00",
+      "image": "",
+      "products": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "discounts.productdiscount",
+    "pk": 3,
+    "fields": {
+      "start": null,
+      "end": "2024-04-26T06:40:11Z",
+      "active": true,
+      "weight": 5,
+      "name": "Xiaomi RedmiBook 15",
+      "slug": "xiaomi-redmibook-15",
+      "description": "Сэкономь 25% при покупке ноутбука Xiaomi RedmiBook 15!",
+      "discount_type": "PRCNT",
+      "value": "25.00",
+      "image": "",
+      "products": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "discounts.productdiscount",
+    "pk": 4,
+    "fields": {
+      "start": null,
+      "end": "2024-03-31T06:40:47Z",
+      "active": true,
+      "weight": 30,
+      "name": "Телевизор Samsung UE75CU8500U",
+      "slug": "televizor-samsung-ue75cu8500u",
+      "description": "Купи Samsung UE75CU8500U на $25 дешевле!",
+      "discount_type": "FXVAL",
+      "value": "25.00",
+      "image": "",
+      "products": [
+        7
+      ]
+    }
+  },
+  {
+    "model": "discounts.categorydiscount",
+    "pk": 1,
+    "fields": {
+      "start": "2023-12-03T05:16:57Z",
+      "end": "2024-03-03T05:17:16Z",
+      "active": true,
+      "weight": 15,
+      "name": "Телевизоры со скидкой",
+      "slug": "televizory-so-skidkoi",
+      "description": "Все телевизоры на четверь дешевле!",
+      "discount_type": "PRCNT",
+      "value": "25.00",
+      "image": "",
+      "categories": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "discounts.categorydiscount",
+    "pk": 2,
+    "fields": {
+      "start": null,
+      "end": "2024-03-30T06:41:21Z",
+      "active": true,
+      "weight": 10,
+      "name": "Электроника со скидкой",
+      "slug": "elektronika-so-skidkoi",
+      "description": "Вся электроника на 15% дешевле!",
+      "discount_type": "PRCNT",
+      "value": "15.00",
+      "image": "",
+      "categories": [
+        2
+      ]
+    }
+  },
+  {
+    "model": "discounts.categorydiscount",
+    "pk": 3,
+    "fields": {
+      "start": null,
+      "end": "2024-03-28T06:41:58Z",
+      "active": true,
+      "weight": 15,
+      "name": "Скидка на ноутбуки",
+      "slug": "skidka-na-noutbuki",
+      "description": "Все ноутбуки со скидкой $50",
+      "discount_type": "FXVAL",
+      "value": "50.00",
+      "image": "",
+      "categories": [
+        7
+      ]
+    }
+  },
+  {
+    "model": "discounts.bulkdiscount",
+    "pk": 1,
+    "fields": {
+      "start": "2024-01-09T08:14:18Z",
+      "end": "2024-03-31T08:11:35Z",
+      "active": true,
+      "weight": 5,
+      "name": "Оптовая скидка",
+      "slug": "optovaya-skidka",
+      "description": "Купи 2 товара на сумму $150 и сэкономь 15%",
+      "discount_type": "PRCNT",
+      "value": "15.00",
+      "image": "",
+      "product_amount": 2,
+      "total_sum": "150.00",
+      "only_unique": false
+    }
+  },
+  {
+    "model": "discounts.bulkdiscount",
+    "pk": 2,
+    "fields": {
+      "start": null,
+      "end": "2024-03-31T08:21:19Z",
+      "active": true,
+      "weight": 10,
+      "name": "Оптовая скидка",
+      "slug": "optovaya-skidka-2",
+      "description": "-25% при покупке 3-х уникальных товаров на сумму от $200",
+      "discount_type": "PRCNT",
+      "value": "25.00",
+      "image": "",
+      "product_amount": 3,
+      "total_sum": "200.00",
+      "only_unique": true
+    }
+  },
+  {
+    "model": "discounts.bulkdiscount",
+    "pk": 3,
+    "fields": {
+      "start": null,
+      "end": "2024-03-29T13:12:59Z",
+      "active": true,
+      "weight": 50,
+      "name": "Оптовая скидка",
+      "slug": "optovaya-skidka-3",
+      "description": "Сэкономь 50% при покупке 5 уникальных товаров на сумму от $500",
+      "discount_type": "PRCNT",
+      "value": "50.00",
+      "image": "",
+      "product_amount": 5,
+      "total_sum": "500.00",
+      "only_unique": true
+    }
+  },
+  {
+    "model": "discounts.comboset",
+    "pk": 1,
+    "fields": {
+      "name": null,
+      "products": [],
+      "categories": [
+        9
+      ]
+    }
+  },
+  {
+    "model": "discounts.comboset",
+    "pk": 2,
+    "fields": {
+      "name": null,
+      "products": [],
+      "categories": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "discounts.combodiscount",
+    "pk": 1,
+    "fields": {
+      "start": null,
+      "end": "2024-03-01T11:13:14Z",
+      "active": true,
+      "weight": 60,
+      "name": "Телефоны с наушниками",
+      "slug": "telefony-s-naushnikami",
+      "description": "Купи любой телефон с наушниками и сэкономь 10%!",
+      "discount_type": "PRCNT",
+      "value": "10.00",
+      "image": "",
+      "set_1": 1,
+      "set_2": 2
+    }
+  }
+]

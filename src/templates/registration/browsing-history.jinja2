@@ -1,0 +1,37 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}
+    История просмотров
+{% endblock %}
+
+{% block header %}
+  {% include 'common/header_min.jinja2' %}
+{% endblock %}
+
+{% block content %}
+    <div class="Middle Middle_top">
+        <div class="Section Section_column Section_columnLeft">
+            <div class="wrap">
+                {% include 'navigation/navigation.jinja2' %}
+                <div class="Section-content">
+                <h1 style="text-align: center;">История просмотров</h1>
+                    <h2>Просмотрено товаров: {{ history|length }}</h2>
+                    {% if history %}
+                        <div class="Cards-browsing-history" style="display: flex; flex-wrap: wrap;">
+                            {% for item in history %}
+                                <div class="Card">
+                                    <a class="Card-picture" href="{{ item.get_absolute_url() }}"><img src="{{ item.image_url }}" alt="{{ item.product.name }}"></a>
+                                    <div class="Card-content">
+                                        <strong class="Card-title"><a href="{{ item.get_absolute_url() }}">{{ item.product.name }}</a></strong>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>История просмотров пуста</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

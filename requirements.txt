@@ -1,4 +1,13 @@
 Django==4.2.4
+django-cleanup==8.0.0
+django-filter==23.5
 django-jinja==2.10.2
 Jinja2==3.1.2
 Pillow==10.0.0
+django-cleanup==8.0.0
+djangorestframework~=3.14.0
+django-filter~=23.3
+yookassa~=3.0.0
+celery==5.3.6
+redis==5.0.1
+phonenumbers==8.13.28
