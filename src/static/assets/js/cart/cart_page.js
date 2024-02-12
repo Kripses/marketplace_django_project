@@ -1,7 +1,7 @@
 const total_price_span = document.getElementById('total_price')
 
 async function get_total_price(auth) {
-    await fetch('http://127.0.0.1:8000/cart/api/cart/')
+    await fetch(`/cart/api/cart/`)
         .then((response) => {
             return response.json()
         })
@@ -19,7 +19,7 @@ async function get_total_price(auth) {
 }
 
 async function remove_product(pk, auth) {
-    await fetch('http://127.0.0.1:8000/cart/api/cart/'+ pk +'/', {
+    await fetch(`/cart/api/cart/`+ pk +'/', {
         method: 'DELETE',
         headers: {
             'X-CSRFToken': csrftoken,
@@ -40,7 +40,7 @@ async function changing_product_amt(pk, term, max_value, auth) {
     } else if (value >= Number(max_value)) {
         document.getElementById('input_'+pk).value = max_value - 1
     }
-    await fetch('http://127.0.0.1:8000/cart/api/cart/'+ pk +'/', {
+    await fetch(`/cart/api/cart/`+ pk +'/', {
         method: 'PATCH',
         body: JSON.stringify({'count': value}),
         headers: {

@@ -1,9 +1,11 @@
+from typing import Tuple
+
 from discounts.services.discount_utils import calculate_discounted_prices
 
 from adminsettings.models import SiteSettings
 
 
-def get_total_price(carts) -> int:
+def get_total_price(carts) -> Tuple[int, int]:
     total_price = 0
     min_price = SiteSettings.objects.first().min_price_for_free_delivery
     delivery_price = SiteSettings.objects.first().delivery_cost
@@ -13,7 +15,8 @@ def get_total_price(carts) -> int:
     sellers = [cart['seller'] for cart in carts.values()]
     if not ((len(sellers) > 1 and (all(seller == sellers[0] for seller in sellers))) and total_price >= min_price):
         total_price += delivery_price
-    return total_price
+        return total_price, delivery_price
+    return total_price, 0
 
 
 def get_fio(first_name: str, last_name: str, username: str) -> str:

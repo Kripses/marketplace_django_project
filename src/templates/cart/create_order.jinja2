@@ -87,7 +87,7 @@
                             <div class="form-group">
                                 <div>
                                     <label class="toggle">
-                                        <input class="delivery_type" id="delivery_type_1" type="radio" name="delivery_type" value="Обычная доставка" checked="checked" /><span class="toggle-box"></span><span class="toggle-text">Обычная доставка</span>
+                                        <input class="delivery_type" id="delivery_type_1" type="radio" name="delivery_type" value="Обычная доставка" data-price="{{ delivery_price }}" checked="checked" /><span class="toggle-box"></span><span class="toggle-text">Обычная доставка</span>
                                     </label>
                                 </div>
                                 <div>
@@ -204,6 +204,10 @@
                                         </div>
                                     {% endfor %}
                                     <div class="Cart-total">
+                                        <div class="Cart-block Cart-block_total">
+                                            <strong class="Cart-title">Доставка:</strong>
+                                            <span id="Delivery-price" class="Cart-price"></span>
+                                        </div>
                                         <div class="Cart-block Cart-block_total">
                                             <strong class="Cart-title">Итого:</strong>
                                             <span id="Cart-price" class="Cart-price">${{ total_price }}</span>

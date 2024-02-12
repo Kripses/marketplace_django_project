@@ -163,23 +163,31 @@ class LimitedProduct(ProductPreviewCard):
                     products = random.choices(products, k=amount)
                 limited_offers = [LimitedProduct(product)
                                   for product in products]
-                now = datetime.datetime.now()
-                midnight = datetime.datetime.combine(
-                    now + datetime.timedelta(days=1),
-                    datetime.time(),
-                )
-                seconds_until_midnight = (midnight - now).seconds
+                end_time = LimitedProduct._get_limited_offer_end_time()
+                seconds_until_end_time = (end_time - datetime.datetime.now()).seconds
                 cache.set(
                     LIMITED_OFFERS_KEY,
                     limited_offers,
-                    timeout=seconds_until_midnight,
+                    timeout=seconds_until_end_time,
                 )
 
         if limited_offers:
             result['regular'] = limited_offers
         if timed_limited_offer:
-            today = datetime.date.today()
-            end_time = today + datetime.timedelta(days=2)
+            end_time = LimitedProduct._get_limited_offer_end_time()
             timed_limited_offer.end_time = end_time
             result['timed'] = timed_limited_offer
         return result
+
+    @staticmethod
+    def _get_limited_offer_end_time():
+        today = datetime.datetime.now(datetime.timezone.utc).today()
+        return datetime.datetime(today.year, today.month, today.day) + datetime.timedelta(days=1)
+
+
+def clear_banner_cache():
+    cache.delete(FIXED_KEY)
+    cache.delete(SLIDER_KEY)
+    cache.delete(TOP_SELLERS_KEY)
+    cache.delete(LIMITED_OFFERS_KEY)
+    cache.delete(TIMED_LIMITED_OFFER_KEY)

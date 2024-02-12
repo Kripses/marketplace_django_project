@@ -40,6 +40,9 @@ class OrderListView(LoginRequiredMixin, ListView):
 
 
 class OrderDetailView(LoginRequiredMixin, DetailView):
+    """
+    Класс для просмотра деталей заказа.
+    """
     template_name = "cart/order-details.jinja2"
     context_object_name = "order"
 
@@ -61,13 +64,14 @@ class CreateOrderView(LoginRequiredMixin, View):
         if request.user.is_authenticated:
             fio = get_fio(request.user.last_name, request.user.first_name, request.user.username)
             carts = (get_carts_JSON(Cart.objects.filter(profile=request.user.id)))
-
+            total_price, delivery_price = get_total_price(carts)
             context = {
                 'form': CreateOrderForm(initial={"cart": carts, "profile": request.user.id}),
                 'user_fio': fio,
                 'user_phone': request.user.phone,
                 'user_email': request.user.email,
-                'total_price': get_total_price(carts),
+                'total_price': total_price,
+                'delivery_price': delivery_price,
                 'express': SiteSettings.objects.first().express_delivery_cost,
             }
 
@@ -80,8 +84,9 @@ class CreateOrderView(LoginRequiredMixin, View):
         form = CreateOrderForm(request.POST)
         if form.is_valid():
             form.save()
-            # перейти к оплате, в случае успешной оплаты создать заказ
             # удалить товары из корзины
+            # Cart.objects.filter(profile=request.user.id).delete()
+
             paid_url = get_paid(Order.objects.filter(profile=request.user.pk).last())
             return redirect(paid_url)
 

@@ -1,7 +1,7 @@
 const compare_amt = document.getElementById('compare_amt')
 
 function compare_length() {
-    fetch('http://127.0.0.1:8000/catalog/compare/amt/').
+    fetch(`/catalog/compare/amt/`).
     then((response) => {
         return response.json()
     }).then((data) => {

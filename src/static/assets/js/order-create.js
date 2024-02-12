@@ -4,6 +4,8 @@ mask_phone = new Inputmask("+7 (999) 999-99-99").mask(document.querySelector('.m
 
 // Функция для заполнения последней страницы заказа
 const total_price = parseFloat(document.getElementById('total-price').value)
+const normal_delivery_price = parseFloat(document.getElementById('delivery_type_1').dataset['price']);
+const express_delivery_price = parseFloat(document.getElementById('delivery_type_2').dataset['price']);
 
 function makeDataOrderCreate() {
     let delivery_type = '';
@@ -42,12 +44,15 @@ function makeDataOrderCreate() {
 
     if (delivery_type === "Экспресс доставка") {
         document.getElementById('total-price').value =
-            total_price + parseFloat(document.getElementById('delivery_type_2').dataset['price']);
+            total_price + express_delivery_price;
         document.getElementById('Cart-price').innerText =
             "$" + document.getElementById('total-price').value;
+        document.getElementById('Delivery-price').innerText = '$' + (normal_delivery_price + express_delivery_price)
+
     } else {
         document.getElementById('total-price').value = total_price
         document.getElementById('Cart-price').innerText = "$" + total_price;
+        document.getElementById('Delivery-price').innerText = '$' + normal_delivery_price
     }
 }
 

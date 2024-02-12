@@ -1,0 +1,175 @@
+[
+  {
+    "model": "account.profile",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$SmC20ULysJNg8Jq0oAnJlj$f2qZ8O5nnnw5XTyjai/JZo0NdlWuKP9c6Fp1HihFWBo=",
+      "last_login": "2024-01-20T13:46:59.093Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "John",
+      "last_name": "Wick",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-12-16T10:55:34Z",
+      "registered_at": "2023-12-16T10:55:35.351Z",
+      "agreement_accept": false,
+      "phone": "1234567",
+      "avatar": "avatars/john_wick.jpg",
+      "address": "",
+      "cart": null,
+      "archived": false,
+      "email": "admin@test.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "account.profile",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$52tYbS96rbYm9azrbGiDGo$kw7JFDhfzsQ/83d1Xilj0ETirXnyj2Y2bOisZ+XUcOI=",
+      "last_login": "2024-01-12T17:40:38.662Z",
+      "is_superuser": false,
+      "username": "new_user_1",
+      "first_name": "Tony",
+      "last_name": "Stark",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-12-16T10:59:14Z",
+      "registered_at": "2023-12-16T10:59:15.397Z",
+      "agreement_accept": false,
+      "phone": "453452",
+      "avatar": "avatars/tony_stark.jpg",
+      "address": "",
+      "cart": null,
+      "archived": false,
+      "email": "seller@test.com",
+      "groups": [
+        5
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "account.profile",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$7aE4dYt5SiFcbpSUm9j82W$fDqDChle1BO0JQTgnTDjb0Og/oCIA1hgjLvaj1ZLr0w=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "new_user_2",
+      "first_name": "new_seller_2",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2023-12-16T11:33:15Z",
+      "registered_at": "2023-12-16T11:33:15.964Z",
+      "agreement_accept": false,
+      "phone": "",
+      "avatar": "",
+      "address": "",
+      "cart": null,
+      "archived": false,
+      "email": "seller2@test.com",
+      "groups": [
+        5
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "account.profile",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$XY3h4uazNi4oHQseHg1Ekh$YXoIvcmDcAOKmzkkbXHvNLaxFYXK4W8CF87jLXSillw=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "new_user_3",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-01-05T16:23:35.065Z",
+      "registered_at": "2024-01-05T16:23:35.568Z",
+      "agreement_accept": false,
+      "phone": null,
+      "avatar": "",
+      "address": "",
+      "cart": null,
+      "archived": false,
+      "email": "new_user_3@test.com",
+      "groups": [
+        5
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "account.profile",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$PdjwzL191X6DJSdZ4gsV3Q$nMkl8cs5wWxwhH1SEw3/VLviPmD52g85xW3zsnoNLaI=",
+      "last_login": "2024-01-05T16:27:47.778Z",
+      "is_superuser": false,
+      "username": "new_user_4",
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-01-05T16:26:55.562Z",
+      "registered_at": "2024-01-05T16:26:56.059Z",
+      "agreement_accept": false,
+      "phone": null,
+      "avatar": "",
+      "address": "",
+      "cart": null,
+      "archived": false,
+      "email": "new_user_4@test.com",
+      "groups": [
+        5
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "account.seller",
+    "pk": 1,
+    "fields": {
+      "name": "ООО \"Торговый дом\"",
+      "description": "This is a new seller",
+      "profile": 2,
+      "archived": false
+    }
+  },
+  {
+    "model": "account.seller",
+    "pk": 2,
+    "fields": {
+      "name": "ИП Петров",
+      "description": "This is a second seller",
+      "profile": 4,
+      "archived": false
+    }
+  },
+  {
+    "model": "account.seller",
+    "pk": 5,
+    "fields": {
+      "name": "ИП Кукуев",
+      "description": "new seller",
+      "profile": 7,
+      "archived": false
+    }
+  },
+  {
+    "model": "account.seller",
+    "pk": 6,
+    "fields": {
+      "name": "ИП Васечкин",
+      "description": "new user",
+      "profile": 8,
+      "archived": false
+    }
+  }
+]

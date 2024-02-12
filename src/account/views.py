@@ -20,6 +20,7 @@ from products.models import Product
 
 from cart.services.cart_actions import merge_cart_products
 
+
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     login_url = 'account:login'
     model = Profile
@@ -150,7 +151,7 @@ class HistoryOrderView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        history = Order.objects.filter(profile=self.request.user).order_by('-created_at')[:20]
+        history = Order.objects.filter(profile=self.request.user.id).order_by('-created_at')[:20]
 
         context['history'] = history
 

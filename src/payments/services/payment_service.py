@@ -22,7 +22,7 @@ def get_paid(order):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": "http://127.0.0.1:8000{}".format(return_url.url)
+            "return_url": "http://127.0.0.1{}".format(return_url.url)
         },
         "capture": True,
         "test": True,
