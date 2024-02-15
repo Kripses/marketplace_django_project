@@ -20,7 +20,7 @@ class DiscountUtilsTest(TestCase):
     def test_get_discounted_price_percent(self):
         discount = ProductDiscount.objects.filter(pk=1).first()
         product = discount.products.first()
-        price = product.sellerproduct_set.first().price
+        price = product.sellerproduct.first().price
         result = discount_utils.get_discounted_price(discount, price)
         expected_price = round(
             price * (100 - discount.value) * decimal.Decimal(0.01),
@@ -31,7 +31,7 @@ class DiscountUtilsTest(TestCase):
     def test_get_discounted_price_fixed_value(self):
         discount = ProductDiscount.objects.filter(pk=2).first()
         product = discount.products.first()
-        price = product.sellerproduct_set.first().price
+        price = product.sellerproduct.first().price
         result = discount_utils.get_discounted_price(discount, price)
         expected_price = max(price - discount.value, discount.MIN_VALUE)
         self.assertEqual(result, expected_price)
@@ -60,7 +60,7 @@ class DiscountUtilsTest(TestCase):
     def test_get_discounted_price_for_product(self):
         product = Product.active.filter(pk=7).first()
         discount = ProductDiscount.current.filter(pk=4).first()
-        price = product.sellerproduct_set.first().price
+        price = product.sellerproduct.first().price
         result = discount_utils.get_discounted_price_for_product(product, price)
         expected_price = max(price - discount.value, discount.MIN_VALUE)
         self.assertEqual(result, expected_price)
@@ -73,9 +73,9 @@ class DiscountUtilsTest(TestCase):
 
     def test_get_bulk_discount_not_unique(self):
         product = Product.active.filter(pk=16).first()
-        # price = product.sellerproduct_set.first().price
+        # price = product.sellerproduct.first().price
         amount = 6
-        product_data = [(product.sellerproduct_set.first(), amount)]
+        product_data = [(product.sellerproduct.first(), amount)]
         result = discount_utils.get_bulk_discount(product_data)
         expected_discount = BulkDiscount.current.filter(pk=1).first()
         self.assertEqual(result, expected_discount)
@@ -83,7 +83,7 @@ class DiscountUtilsTest(TestCase):
     def test_get_bulk_discount_unique(self):
         products = Product.active.filter(pk__in=[14, 15, 16]).all()
         products_data = [
-            (prod.sellerproduct_set.first(), 1)
+            (prod.sellerproduct.first(), 1)
             for prod in products
         ]
         result = discount_utils.get_bulk_discount(products_data)
@@ -92,7 +92,7 @@ class DiscountUtilsTest(TestCase):
 
     def test_calculate_discount_prices_one_product_overlapping_discounts(self):
         product = Product.active.filter(pk=7).first()
-        seller_product = product.sellerproduct_set.first()
+        seller_product = product.sellerproduct.first()
         discount = ProductDiscount.current.filter(pk=4).first()
         amount = 1
         expected_price = max(seller_product.price - discount.value, discount.MIN_VALUE)
@@ -103,7 +103,7 @@ class DiscountUtilsTest(TestCase):
 
     def test_calculate_discount_prices_one_product_bulk(self):
         product = Product.active.filter(pk=5).first()
-        seller_product = product.sellerproduct_set.first()
+        seller_product = product.sellerproduct.first()
         discount = BulkDiscount.current.filter(pk=1).first()
         amount = 2
         expected_price = round(
@@ -119,7 +119,7 @@ class DiscountUtilsTest(TestCase):
         products = Product.active.filter(pk__in=[3, 5])
         discount = ComboDiscount.current.filter(pk=1).first()
         products_data = [
-            (prod.sellerproduct_set.first(), 1)
+            (prod.sellerproduct.first(), 1)
             for prod in products
         ]
         expected_data = [
@@ -141,7 +141,7 @@ class DiscountUtilsTest(TestCase):
         combo_products = Product.active.filter(pk__in=[3, 5])
         combo_discount = ComboDiscount.current.filter(pk=1).first()
         products_data = [
-            (prod.sellerproduct_set.first(), 1)
+            (prod.sellerproduct.first(), 1)
             for prod in combo_products
         ]
         expected_data = [
@@ -159,7 +159,7 @@ class DiscountUtilsTest(TestCase):
         single_discount = ProductDiscount.objects.filter(pk=4).first()
         single_product = single_discount.products.first()
         single_product_data = (
-            single_product.sellerproduct_set.first(),
+            single_product.sellerproduct.first(),
             1,
         )
         products_data.append(single_product_data)
@@ -174,7 +174,7 @@ class DiscountUtilsTest(TestCase):
         ))
         no_discount_product = Product.objects.filter(pk=17).first()
         no_discount_product_data = (
-            no_discount_product.sellerproduct_set.first(),
+            no_discount_product.sellerproduct.first(),
             1,
         )
         products_data.append(no_discount_product_data)
