@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LogoutView, LoginView
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DetailView,
@@ -12,60 +12,18 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import UserRegistrationForm, ProfileForm
-from .models import BrowsingHistory, Profile, Seller
+from account.forms import UserRegistrationForm, ProfileForm
+from account.models import BrowsingHistory, Profile, Seller
 from adminsettings.models import SiteSettings
 from cart.models import Order
+from cart.services.cart_actions import merge_cart_products
 from products.models import Product
 
-from cart.services.cart_actions import merge_cart_products
 
-
-class ProfileUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = 'account:login'
-    model = Profile
-    form_class = ProfileForm
-    template_name = 'registration/profile.jinja2'
-    success_url = reverse_lazy('account:profile')
-
+class FormValidationMixin:
     def form_valid(self, form):
-        form.save()
-        response = super().form_valid(form)
-
-        if form.cleaned_data['new_password1'] != form.cleaned_data['new_password2']:
-            messages.error(self.request, 'Пароли не совпадают.')
-            return self.render_to_response(self.get_context_data(form=form))
-
-        username = form.cleaned_data.get('email')
-        password = form.cleaned_data.get('password1')
-        user = authenticate(
-            self.request,
-            username=username,
-            password=password,
-        )
-        login(request=self.request, user=user)
-        messages.success(self.request, "Данные успешно обновлены.")
-        return response
-
-    def form_invalid(self, form):
-        response = super().form_invalid(form)
-        messages.error(self.request, "Ошибка обновления данных.")
-        return response
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-
-class RegisterView(CreateView):
-    form_class = UserRegistrationForm
-    template_name = 'registration/registr.jinja2'
-    success_url = reverse_lazy('account:account')
-
-    def form_valid(self, form):
-        # form.save()
         user_profile = form.save(commit=False)
         full_name = form.cleaned_data.get('full_name')
-        # = input_string.split()
         full_name = full_name.split()
         user_profile.username = full_name[0]
         if len(full_name) > 1:
@@ -75,10 +33,6 @@ class RegisterView(CreateView):
         user_profile.save()
         response = super().form_valid(form)
 
-        if form.cleaned_data['password1'] != form.cleaned_data['password2']:
-            messages.error(self.request, 'Пароли не совпадают.')
-            return self.render_to_response(self.get_context_data(form=form))
-
         username = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password1')
         user = authenticate(
@@ -86,20 +40,31 @@ class RegisterView(CreateView):
             username=username,
             password=password,
         )
+        merge_cart_products(user, self.request.session.get('cart'))
         login(request=self.request, user=user)
+        messages.success(self.request, "Данные успешно обновлены.")
         return response
 
-    def get(self, request, *args, **kwargs):
-        form = self.get_form()
-        return self.render_to_response({'form': form})
 
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        # print(form)
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.render_to_response({'form': form})
+class ProfileUpdateView(FormValidationMixin, LoginRequiredMixin, UpdateView):
+    login_url = 'account:login'
+    model = Profile
+    form_class = ProfileForm
+    template_name = 'registration/profile.jinja2'
+    success_url = reverse_lazy('account:profile')
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Ошибка обновления данных.")
+        return super().form_invalid(form)
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class RegisterView(FormValidationMixin, CreateView):
+    form_class = UserRegistrationForm
+    template_name = 'registration/registr.jinja2'
+    success_url = reverse_lazy('account:account')
 
 
 class UserLoginView(LoginView):
@@ -107,7 +72,7 @@ class UserLoginView(LoginView):
     template_name = 'registration/login.jinja2'
 
     def post(self, request, *args, **kwargs):
-        super(UserLoginView, self).post(self, request, *args, **kwargs)
+        super().post(self, request, *args, **kwargs)
         user = authenticate(request, email=request.POST.get('username'), password=request.POST.get('password'))
         if user is not None:
             merge_cart_products(user, request.session.get('cart'))
@@ -118,11 +83,6 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     next_page = reverse_lazy('account:login')
-
-
-# class UserAccountView(LoginRequiredMixin, TemplateView):
-#     login_url = 'account:login'
-#     template_name = 'registration/account.jinja2'
 
 
 class UserEmailView(LoginRequiredMixin, TemplateView):

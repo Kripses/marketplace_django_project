@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block header %}
-    {% include 'common/header_parts/header_middle_full.jinja2' %}
-    {% include 'common/header_parts/header_search.jinja2' %}
+    {% include 'common/header_full.jinja2' %}
 {% endblock %}
 
 {% block content %}
@@ -55,11 +54,11 @@
                 {% endfor %}
                     <div class="Cart-total">
                         <div class="Cart-block Cart-block_total">
-                            <strong class="Cart-title">Итого:</strong>
+                            <strong class="Cart-title">{% trans %}Итого:{% endtrans %}</strong>
                             <span class="Cart-price" id="total_price">{{ total_price }}$</span>
                         </div>
                         <div class="Cart-block">
-                            <a class="btn btn_success btn_lg" href="{{ url('cart:create_order') }}">Оформить заказ</a>
+                            <a class="btn btn_success btn_lg" href="{{ url('cart:create_order') }}">{% trans %}Оформить заказ{% endtrans %}</a>
                         </div>
                     </div>
             </div>

@@ -10,8 +10,8 @@ from django.core.files.images import ImageFile
 from django.db import transaction
 from django.utils.text import slugify
 
-from .import_utils import ImportLogger, FileManager
-from .mailer import send_email
+from products.services.product_import.import_utils import ImportLogger, FileManager
+from products.services.product_import.mailer import send_email
 from account.models import Profile, Seller
 from products.models import (
     Category,

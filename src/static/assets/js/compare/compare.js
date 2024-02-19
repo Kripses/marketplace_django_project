@@ -3,6 +3,8 @@ const compare_main = document.getElementById('compare-main')
 const compare_main_label = document.getElementById('compare-main-error')
 const compare_dif_category = document.getElementById('compare_dif_category')
 
+const csrftoken = getCookie('csrftoken');
+
 async function delete_all() {
     await fetch('delete_all/', {
         method: 'DELETE',

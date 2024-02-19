@@ -30,8 +30,7 @@ def get_discounted_price(discount: Discount, price: Decimal):
         return round(price * (100 - discount.value) * decimal.Decimal(0.01), 2)
     elif discount.discount_type == DiscountTypeEnum.FIXED_VALUE:
         return max(price - discount.value, discount.MIN_VALUE)
-    else:
-        return discount.value
+    return discount.value
 
 
 def __get_sort_params(discount: Discount):

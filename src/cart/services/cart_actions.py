@@ -5,6 +5,7 @@ from products.models import SellerProduct
 
 
 def merge_cart_products(user, cart_list_session):
+    # TODO: добавить докстринг для чего этот сервис
     if cart_list_session is None:
         return
     for product_session in cart_list_session:
@@ -32,6 +33,7 @@ def clear_cart(profile):
 
 
 def check_product_amt(cart):
+    # TODO: добавить докстринг для чего этот сервис
     cart.filter(product_seller__count=0).delete()
     new_counts = map(
         lambda product:

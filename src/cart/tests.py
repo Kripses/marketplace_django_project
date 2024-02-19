@@ -1,8 +1,4 @@
-from urllib.parse import urlencode
-
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.test import TestCase, Client
+from django.test import TestCase
 from django.urls import reverse
 
 from account.models import Profile

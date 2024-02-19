@@ -19,11 +19,11 @@
                                         {{ banner.name|truncate(30) }}
                                     </strong>
                                     <div class="Slider-text">
-                                        {{ banner.description|truncate(250) }}
+                                        {{ banner.description|truncate(200) }}
                                     </div>
                                     <div class="Slider-footer">
                                         <a class="btn btn_primary"
-                                           href="{{ banner.absolute_url }}">Get Started</a>
+                                           href="{{ banner.absolute_url }}">{% trans %}Открыть{% endtrans %}</a>
                                     </div>
                                 </div>
                                 <div class="row-block">
@@ -60,7 +60,7 @@
                                             {{ banner.name }}
                                         </strong>
                                         <div class="BannersHomeBlock-content">
-                                            from&#32;<span class="BannersHomeBlock-price">${{ banner.min_price }}</span>
+                                            {% trans %}от{% endtrans %}&#32;<span class="BannersHomeBlock-price">${{ banner.min_price }}</span>
                                         </div>
                                     </div>
                                     <div class="BannersHomeBlock-block">
@@ -82,7 +82,7 @@
                     <div class="Section-column">
                         <div class="Section-columnSection Section-columnSection_mark">
                             <header class="Section-columnHeader">
-                            <strong class="Section-columnTitle">ОГРАНИЧЕННЫЕ ПРЕДЛОЖЕНИЯ
+                            <strong class="Section-columnTitle">{% trans %}ОГРАНИЧЕННЫЕ ПРЕДЛОЖЕНИЯ{% endtrans %}
                             </strong>
                             </header>
                             {% with product = limited_offers.timed %}
@@ -143,7 +143,7 @@
                 {% endif %}
                 <div class="Section-content">
                     <header class="Section-header">
-                        <h2 class="Section-title">Популярные товары</h2>
+                        <h2 class="Section-title">{% trans %}Популярные товары{% endtrans %}</h2>
                     </header>
                     <div class="Cards">
                         {% if top_sellers %}
@@ -187,7 +187,7 @@
                     <div class="Section-content">
                         <div class="Slider Slider_carousel">
                             <header class="Section-header Section-header_close">
-                                <h2 class="Section-title">Ограниченный тираж
+                                <h2 class="Section-title">{% trans %}Ограниченный тираж{% endtrans %}
                                 </h2>
                                 <div class="Section-control">
                                     <div class="Slider-navigate">

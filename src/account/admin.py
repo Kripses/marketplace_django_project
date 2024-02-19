@@ -3,9 +3,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
-from .models import Profile, Seller
-
-# admin.site.register(Profile, UserAdmin)
+from account.models import Profile, Seller
 
 
 @admin.register(Profile)

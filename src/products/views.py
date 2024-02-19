@@ -12,8 +12,6 @@ from django.urls import reverse
 from django.views.generic import DetailView, FormView, ListView, TemplateView
 from django.utils import timezone
 
-from catalog.forms import ReviewForm
-
 from .forms import ProductsImportForm
 from .models import Product
 from .services.catalog_queryset import CatalogQuerySetProcessor
@@ -24,11 +22,12 @@ from .services.compare_products import (
     get_compare_list_amt,
     get_compare_list,
 )
-from .services.banners import Banner, LimitedProduct, TopSellerProduct
+from .services.banners import Banner, LimitedProduct, TopSellerProduct, clear_banner_cache
 from .tasks import import_products
 from account.models import BrowsingHistory
 from catalog.forms import ReviewForm
 from catalog.services import add_review, get_count_review
+from .context_processors import clear_category_cache
 
 
 class IndexView(TemplateView):
@@ -97,11 +96,18 @@ class CatalogView(ListView):
 
 
 class ProductDetailsView(DetailView):
+    """
+    View детальной страницы товара
+    """
     model = Product
     template_name = "products/product-details.jinja2"
     context_object_name = "product"
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet:
+        """
+        Метод для получения queryset товара.
+        Если данные не найдены в кэше, они извлекаются из базы данных и кэшируются на 24 часа.
+        """
         slug = self.kwargs.get('slug')
         cache_key = f'product_details_{slug}'
         queryset = cache.get(cache_key)
@@ -116,7 +122,11 @@ class ProductDetailsView(DetailView):
 
         return queryset
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> Dict:
+        """
+        Метод для получения контекстных данных, передаваемых в шаблон.
+        Включает изображения товара, связанные товары от продавца, свойства товара, отзывы и количество отзывов.
+        """
         context_data = super().get_context_data(**kwargs)
 
         context_data['images'] = self.object.images.all()
@@ -127,7 +137,11 @@ class ProductDetailsView(DetailView):
 
         return context_data
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs) -> HttpResponse:
+        """
+        Метод обработки GET-запроса.
+        Если пользователь аутентифицирован, создается запись о просмотре товара в истории просмотров.
+        """
         self.object = self.get_object()
 
         if request.user.is_authenticated:
@@ -200,15 +214,12 @@ class ProductsCompareView(ListView):
                     diff_properties[product_property['property_name']].append(product_property['property_value'])
                 else:
                     diff_properties[product_property['property_name']] = [product_property['property_value']]
-        for key, value in diff_properties.items():
-            print(len(set(map(lambda elem: elem.lower(), value))) == 1, len(context['properties']) > 1)
         context['not_dif_category'] = [
             key for key, value in diff_properties.items()
             if len(set(map(lambda elem: elem.lower(), value))) == 1
             and
             len(context['properties']) > 1
         ]
-        print(context['not_dif_category'])
 
         for product in context['properties']:
             product['dif_properties'] = [
@@ -294,3 +305,14 @@ class ProductImportFormView(PermissionRequiredMixin, FormView):
             else:
                 context['status'] = task.status
         return context
+
+
+def reset_banners_cache(request):
+    """
+    AJAX функция для сброса кэша при смене языка
+    """
+    if request.method == 'POST':
+        clear_banner_cache()
+        clear_category_cache()
+        return HttpResponse()
+    return HttpResponse('Нет доступа')

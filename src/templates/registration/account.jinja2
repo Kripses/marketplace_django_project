@@ -1,7 +1,7 @@
 {% extends 'base.jinja2' %}
 
 {% block title %}
-  Account
+  {% trans %}Аккаунт{% endtrans %}
 {% endblock %}
 
 {% block header %}
@@ -27,7 +27,7 @@
                             </div>
                             <div class="Account-column">
                                 <div class="Account-name" style="text-transform: capitalize">{{ user.username }}
-                                </div><a class="Account-editLink" href="../profile">Редактировать профиль</a>
+                                </div><a class="Account-editLink" href="../profile">{% trans %}Редактировать профиль{% endtrans %}</a>
                             </div>
                         </div>
 {#                        <div class="Account-group">#}
@@ -40,19 +40,19 @@
                                         <div class="row">
                                             <div class="row-block">
                                                 <a class="Order-title" href="{{ url('cart:order_detail', order.pk) }}">
-                                                    Заказ №
+                                                    {% trans %}Заказ{% endtrans %} №
                                                     <span class="Order-numberOrder">{{ order.id }}</span>
-                                                    от
+                                                    {% trans %}от{% endtrans %}
                                                     <span class="Order-dateOrder">{{ order.created_at.strftime('%d.%m.%Y') }}</span>
                                                 </a>
                                                 <a class="menu-link" id="historyorder" href="{{ url('account:historyorder') }}">
-                                                    История заказов
+                                                    {% trans %}История заказов{% endtrans %}
                                                 </a>
                                             </div>
                                             <div class="row-block">
                                                 <div class="Order-info Order-info_delivery">
                                                     <div class="Order-infoType">
-                                                        Тип доставки:
+                                                        {% trans %}Тип доставки:{% endtrans %}
                                                     </div>
                                                     <div class="Order-infoContent">
                                                         {{ order.delivery_type }}
@@ -60,7 +60,7 @@
                                                 </div>
                                                 <div class="Order-info Order-info_pay">
                                                     <div class="Order-infoType">
-                                                        Оплата:
+                                                        {% trans %}Оплата:{% endtrans %}
                                                     </div>
                                                     <div class="Order-infoContent">
                                                         {{ order.payment_type }}
@@ -68,7 +68,7 @@
                                                 </div>
                                                 <div class="Order-info">
                                                     <div class="Order-infoType">
-                                                        Общая стоимость:
+                                                        {% trans %}Общая стоимость:{% endtrans %}
                                                     </div>
                                                     <div class="Order-infoContent">
                                                         <span class="Order-price">
@@ -78,7 +78,7 @@
                                                 </div>
                                                 <div class="Order-info Order-info_status">
                                                     <div class="Order-infoType">
-                                                        Статус:
+                                                        {% trans %}Статус:{% endtrans %}
                                                     </div>
                                                     <div class="Order-infoContent">{{ order.status }}
                                                     </div>
@@ -88,7 +88,7 @@
                                     </div>
                                 </div>
                             {% else %}
-                                <li>У вас нет заказов.</li>
+                                <li>{% trans %}У вас нет заказов.{% endtrans %}</li>
                             {% endif %}
 {#                            <div class="Account-column Account-column_full">#}
 {#                                <div class="Order Order_anons">#}

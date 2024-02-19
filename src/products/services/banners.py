@@ -16,6 +16,7 @@ TIMED_LIMITED_OFFER_KEY = 'index_timed_limited_offer'
 
 
 class CacheableContextProduct:
+    # TODO: добавить докстринг для чего этот сервис
     def __init__(self, product: Product):
         self.pk = product.pk
         self.name = product.name
@@ -25,6 +26,7 @@ class CacheableContextProduct:
 
 
 class ProductPreviewCard(CacheableContextProduct):
+    # TODO: добавить докстринг для чего этот сервис
     def __init__(self, product: Product):
         super().__init__(product)
         self.category = product.category.full_name
@@ -33,6 +35,7 @@ class ProductPreviewCard(CacheableContextProduct):
 
 
 class CacheableContextCategory:
+    # TODO: добавить докстринг для чего этот сервис
     def __init__(self, category: Category):
         self.name = category.name
         self.absolute_url = category.get_absolute_url()

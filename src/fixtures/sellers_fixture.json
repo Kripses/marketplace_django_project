@@ -15,7 +15,7 @@
     "fields": {
       "name": "ИП Петров",
       "description": "This is a second seller",
-      "profile": 4,
+      "profile": 3,
       "archived": false
     }
   }

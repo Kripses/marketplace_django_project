@@ -1,7 +1,7 @@
 {% extends 'base.jinja2' %}
 
 {% block title %}
-    Список заказов
+    {% trans %}Список заказов{% endtrans %}
 {% endblock %}
 
 {% block extra_css %}
@@ -20,7 +20,7 @@
             <div class="wrap">
                 <div class="Middle-header">
                     <a href="{{ url('cart:order_detail', order.pk) }}">
-                        <h1 class="Middle-title">Заказ №{{ order.id }} от {{ order.created_at.strftime('%d.%m.%y') }}</h1>
+                        <h1 class="Middle-title">{% trans %}Заказ{% endtrans %} №{{ order.id }} от {{ order.created_at.strftime('%d.%m.%y') }}</h1>
                     </a>
                 </div>
             </div>

@@ -1,6 +1,7 @@
+from django.utils.translation import ngettext
+
 from account.models import Profile
-from .forms import ReviewForm
-from .models import Review
+from catalog.models import Review
 from products.models import Product
 
 
@@ -47,11 +48,9 @@ def get_count_review(pk: int) -> tuple:
         result (tuple) - количество отзывов на товар.
     """
     count_review = len(Review.objects.filter(product=pk))
-    if (count_review % 10 == 1) and (count_review % 100 != 11):
-        return count_review, f'{count_review} отзыв'
-    elif ((count_review % 10 >= 2)
-          and (count_review % 10 <= 4)
-          and ((count_review % 100 < 10) or (count_review % 100 >= 20))):
-        return count_review, f'{count_review} отзыва'
-    else:
-        return count_review, f'{count_review} отзывов'
+    review = ngettext(
+        "review",
+        "reviews",
+        count_review
+    )
+    return count_review, f'{count_review} {review}'

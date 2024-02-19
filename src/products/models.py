@@ -3,8 +3,8 @@ from decimal import Decimal
 from django.db import models
 from django.urls import reverse
 
-from .services import product_utils
-from .validators import validate_not_subcategory
+from products.services import product_utils
+from products.validators import validate_not_subcategory
 
 
 class Tag(models.Model):

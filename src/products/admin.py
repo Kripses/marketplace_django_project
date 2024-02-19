@@ -3,9 +3,10 @@ from django.db.models import QuerySet
 from django import forms
 from django.http import HttpRequest
 from django.urls import path
+from modeltranslation.admin import TranslationAdmin
 
-from . import admin_filters, models
-from .views import ProductImportFormView
+from products import admin_filters, models
+from products.views import ProductImportFormView
 
 
 @admin.action(description="Archive selected products")
@@ -32,7 +33,7 @@ class PictureInline(admin.StackedInline):
 
 
 @admin.register(models.Value)
-class PropertyValueAdmin(admin.ModelAdmin):
+class PropertyValueAdmin(TranslationAdmin):
 
     actions = [
         mark_archived,
@@ -46,7 +47,7 @@ class PropertyValueAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Property)
-class PropertyAdmin(admin.ModelAdmin):
+class PropertyAdmin(TranslationAdmin):
 
     actions = [
         mark_archived,
@@ -59,7 +60,7 @@ class PropertyAdmin(admin.ModelAdmin):
 
 
 @admin.register(models.Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     actions = [
         mark_archived,
         mark_unarchived
@@ -117,9 +118,6 @@ class ProductAdmin(admin.ModelAdmin):
     def avg_disc_price(self, obj: models.Product) -> int:
         return obj.discounted_average_price
 
-    # def delete_queryset(self, request: HttpRequest, queryset: QuerySet):
-    #     queryset.update(archived=True)
-
 
 @admin.register(models.SellerProduct)
 class SellerProductAdminModel(admin.ModelAdmin):
@@ -128,15 +126,14 @@ class SellerProductAdminModel(admin.ModelAdmin):
 
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
-
-        if request.user.is_superuser:
+        if request.user.is_superuser or request.user.groups.filter(name='Content-managers').exists():
             return queryset
         else:
             return queryset.filter(seller__profile=request.user)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        if not request.user.is_superuser:
+        if not (request.user.is_superuser or request.user.groups.filter(name='Content-managers').exists()):
             form.base_fields['seller'].widget = forms.HiddenInput()
             form.base_fields['seller'].initial = request.user.seller_set.first()
         return form
@@ -162,7 +159,7 @@ class SubcategoryInline(admin.TabularInline):
 
 
 @admin.register(models.Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = [
         'name',
         'slug',

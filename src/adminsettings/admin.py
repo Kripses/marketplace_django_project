@@ -3,7 +3,7 @@ from django.core.cache import cache
 from django.shortcuts import redirect
 from django.urls import path
 
-from .models import SiteSettings
+from adminsettings.models import SiteSettings
 
 
 @admin.register(SiteSettings)

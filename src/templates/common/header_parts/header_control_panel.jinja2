@@ -32,11 +32,15 @@
             <nav class="row-block">
                 <div class="row ControlPanel-rowSplit">
                     <div class="row-block">
+                        <a class="ControlPanel-title" onclick="changeLanguage('ru'); return false;">RU</a>
+                        <a class="ControlPanel-title" onclick="changeLanguage('en'); return false;">EN</a>
+                    </div>
+                    <div class="row-block">
                         {% if user.is_authenticated %}
-                            <a class="ControlPanel-title" href="{{ url('account:account') }}">Личный кабинет</a>
+                            <a class="ControlPanel-title" href="{{ url('account:account') }}">{% trans %}Личный кабинет{% endtrans %}</a>
                         {% else %}
-                            <a class="ControlPanel-title" href="{{ url('account:login') }}">Вход</a>
-                            <a class="ControlPanel-title" href="{{ url('account:register') }}">Регистрация</a>
+                            <a class="ControlPanel-title" href="{{ url('account:login') }}">{% trans %}Вход{% endtrans %}</a>
+                            <a class="ControlPanel-title" href="{{ url('account:register') }}">{% trans %}Регистрация{% endtrans %}</a>
                         {% endif %}
                     </div>
                 </div>
@@ -44,3 +48,5 @@
         </div>
     </div>
 </div>
+
+<script src="{{ static('assets/js/change-language.js') }}"></script>

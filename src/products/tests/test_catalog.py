@@ -3,7 +3,7 @@ from django.test import TestCase
 
 class CatalogPageTest(TestCase):
     fixtures = [
-        'fixtures/profile_fixture.json',
+        'fixtures/account_fixture.json',
         'fixtures/category_fixture.json',
         'fixtures/products_fixture.json',
         'fixtures/sellers_fixture.json',

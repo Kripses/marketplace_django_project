@@ -1,14 +1,23 @@
 import re
 
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.password_validation import validate_password
 
-from .models import Profile
+from account.models import Profile
 
 
 class UserRegistrationForm(UserCreationForm):
     full_name = forms.CharField(max_length=200)
+    password1 = forms.CharField(
+        label="Пароль",
+        widget=forms.PasswordInput(),
+        validators=[validate_password],
+        required=False,
+    )
+    password2 = forms.CharField(
+        label="ПоПароль",
+        widget=forms.PasswordInput(), required=False)
 
     class Meta:
         model = Profile
@@ -16,6 +25,7 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
+    full_name = forms.CharField(max_length=200)
     phone = forms.CharField(max_length=17, required=False)
     new_password1 = forms.CharField(
         label="Пароль",
@@ -36,5 +46,5 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ['phone', 'avatar', 'username', 'new_password1', 'new_password2']
+        fields = ['phone', 'avatar', 'full_name', 'new_password1', 'new_password2']
 

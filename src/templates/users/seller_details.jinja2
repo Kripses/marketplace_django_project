@@ -45,7 +45,7 @@
                                         {% if seller.profile.avatar %}
                                             <div class="row-block">
                                                 <div class="Seller-avatar">
-                                                    <img src="{{ seller.profile.avatar }}" alt="аватар продавца">
+                                                    <img src="{{ seller.profile.avatar }}" alt="{% trans %}Аватар продавца{% endtrans %}">
                                                 </div>
                                             </div>
                                         {% endif %}
@@ -54,7 +54,7 @@
                                         <div class="row-block">
                                             <div class="Seller-info">
                                                 <div class="Seller-infoType">
-                                                    Телефон:
+                                                    {% trans %}Телефон:{% endtrans %}
                                                 </div>
                                                 <div class="Seller-infoContent">
                                                     {{ seller.profile.phone }}
@@ -72,7 +72,7 @@
                                         <div class="row-block">
                                             <div class="Seller-info">
                                                 <div class="Seller-infoType">
-                                                    Адрес:
+                                                    {% trans %}Адрес:{% endtrans %}
                                                 </div>
                                                 <div class="Seller-infoContent">
                                                     {{ seller.profile.address }}

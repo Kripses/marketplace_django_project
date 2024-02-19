@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 
-from . import models
+from products import models
 
 
 def validate_not_subcategory(value):

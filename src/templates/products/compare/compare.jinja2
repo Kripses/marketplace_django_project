@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block header %}
-    {% include 'common/header_parts/header_middle_full.jinja2' %}
-    {% include 'common/header_parts/header_search.jinja2' %}
+    {% include 'common/header_full.jinja2' %}
 {% endblock %}
 
 {% block content %}
@@ -16,18 +15,18 @@
                 <div class="Product Product-compare" id="compare-main">
                     <p id="compare-main-error"></p>
                     {% if diff_category %}
-                        <p style="color: red" id="compare_dif_category">Неасравнимое не сравнить</p>
+                        <p style="color: red" id="compare_dif_category">{% trans %}Невозможно сравнить{% endtrans %}</p>
                     {% endif %}
                     <div class="Product-delete-all">
                         <div class="form-group" id="properties_chekbox_div">
                             <label class="toggle">
                                 <input type="checkbox" id="type_properties" onclick="change_properties()" checked>
                                 <span class="toggle-box"></span>
-                                <span class="toggle-text">Только различающиеся характеристики</span>
+                                <span class="toggle-text">{% trans %}Только различающиеся характеристики{% endtrans %}</span>
                             </label>
                         </div>
                         <a style="text-decoration: none;" onclick="delete_all()">
-                            <span class="Delete-all-products">Удалить всё&nbsp</span>
+                            <span class="Delete-all-products">{% trans %}Удалить всё{% endtrans %}&nbsp</span>
                             <img src="{{ static('assets/img/icons/card/delete.svg') }}" alt="delete.svg">
                         </a>
                     </div>
@@ -71,7 +70,7 @@
                                         <a class="btn btn_primary" onclick="add_to_cart('{{ elem.pk }}')">
                                             <img class="btn-icon" src="{{ static('assets/img/icons/card/cart_white.svg') }}"
                                                 alt="cart_white.svg">
-                                            <span class="btn-content">Добавить в корзину</span>
+                                            <span class="btn-content">{% trans %}Добавить в корзину{% endtrans %}</span>
                                         </a>
                                     </div>
                                 </div>
@@ -80,9 +79,12 @@
                     </div>
                 </div>
             {% else %}
-                <div class="Product Product-compare" style="color: red">недостаточно товаров для сравнения</div>
+                <div class="Product Product-compare" style="color: red">{% trans %}Недостаточно товаров для сравнения{% endtrans %}</div>
             {% endif %}
             </div>
     </div>
+<script>
+    const translatedText = "{{ _('Недостаточно товаров для сравнения') }}";
+</script>
 <script src="{{ static('assets/js/compare/compare.js') }}"></script>
 {% endblock %}

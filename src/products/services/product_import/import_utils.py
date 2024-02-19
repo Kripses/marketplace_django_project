@@ -8,6 +8,7 @@ from products.models import ProductImportLog
 
 
 class ImportLogger:
+    # TODO: добавить докстринг для чего этот сервис
     def __init__(self, start, file_manager):
         self.__log_messages = []
         self.__start = start

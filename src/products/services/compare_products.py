@@ -1,10 +1,3 @@
-from django.http import HttpRequest
-
-from django.core.cache import cache
-
-from ..models import Product
-
-
 session_key = 'compare_list_key_slug'
 max_list_amt = 4
 

@@ -57,7 +57,7 @@ class Command(BaseCommand):
                 max_iteration -= 1
             if err_list:
                 self.stdout.write(self.style.WARNING('Not all fixtures have been loaded. Check it:'))
-                self.stdout.write(self.style.WARNING(err_list))
+                self.stdout.write(self.style.WARNING(", ".join(err_list)))
             else:
                 self.stdout.write(self.style.SUCCESS('\nAll commands and loadings have been successful!'))
                 self.stdout.write(self.style.SUCCESS(f'\nFixtures upload order: {order_load}'))

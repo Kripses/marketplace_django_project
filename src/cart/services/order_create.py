@@ -1,11 +1,11 @@
 from typing import Tuple
 
 from discounts.services.discount_utils import calculate_discounted_prices
-
 from adminsettings.models import SiteSettings
 
 
 def get_total_price(carts) -> Tuple[int, int]:
+    # TODO: добавить докстринг для чего этот сервис
     total_price = 0
     min_price = SiteSettings.objects.first().min_price_for_free_delivery
     delivery_price = SiteSettings.objects.first().delivery_cost
@@ -21,18 +21,16 @@ def get_total_price(carts) -> Tuple[int, int]:
 
 def get_fio(first_name: str, last_name: str, username: str) -> str:
     if last_name and first_name:
-        fio = f"{last_name} {first_name}"
+        return f"{last_name} {first_name}"
     elif last_name:
-        fio = last_name
+        return last_name
     elif first_name:
-        fio = first_name
-    else:
-        fio = username
-
-    return fio
+        return first_name
+    return username
 
 
 def get_carts_JSON(carts):
+    # TODO: добавить докстринг для чего этот сервис
     response = {}
     carts_list = [
         (cart.product_seller, cart.count)

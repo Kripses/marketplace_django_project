@@ -9,26 +9,26 @@
                 </a>
             </div>
             <div class="row-block">
-                <strong class="Footer-title">Навигация</strong>
+                <strong class="Footer-title">{% trans %}Навигация{% endtrans %}</strong>
                 <ul class="menu menu_vt Footer-menu">
                     <li class="menu-item">
-                        <a class="menu-link" href="{{ url('index') }}">Главная</a>
+                        <a class="menu-link" href="{{ url('index') }}">{% trans %}Главная{% endtrans %}</a>
                     </li>
                     <li class="menu-item">
-                        <a class="menu-link" href="{{ url('products:catalog') }}">Каталог</a>
+                        <a class="menu-link" href="{{ url('products:catalog') }}">{% trans %}Каталог{% endtrans %}</a>
                     </li>
                     <li class="menu-item">
-                        <a class="menu-link" href="{{ url('products:product_compare') }}">Сравнение</a>
+                        <a class="menu-link" href="{{ url('products:product_compare') }}">{% trans %}Сравнение{% endtrans %}</a>
                     </li>
                     {% if user.is_authenticated %}
                         <li class="menu-item">
-                            <a class="menu-link" href="{{ url('account:account') }}">Профиль</a>
+                            <a class="menu-link" href="{{ url('account:account') }}">{% trans %}Профиль{% endtrans %}</a>
                         </li>
                     {% endif %}
                 </ul>
             </div>
             <div class="row-block">
-                <strong class="Footer-title">Контакты</strong>
+                <strong class="Footer-title">{% trans %}Контакты{% endtrans %}</strong>
                 <ul class="menu menu_vt Footer-menu">
                     <li class="menu-item">
                         Phone: <a class="menu-link" href="tel:+8800200600">8-800-200-600</a>

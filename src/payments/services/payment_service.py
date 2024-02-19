@@ -1,20 +1,20 @@
-from django.shortcuts import redirect
-
+import os
 from yookassa import Configuration, Payment
 import uuid
 
-from cart.services.cart_actions import clear_cart
+from django.urls import reverse
 
+from cart.services.cart_actions import clear_cart
+from cart.models import Order
 from products.models import SellerProduct
 
-from cart.models import Order
 
-Configuration.account_id = '306183'
-Configuration.secret_key = 'test_6EQxV_1iuGm1G3oircj-EAeRk4PZSRW3t1yTT6QU2ko'
+Configuration.account_id = os.getenv("SHOP_ID", "")
+Configuration.secret_key = os.getenv("SECRET_KEY", "")
 
 
 def get_paid(order):
-    return_url = redirect('cart:order_detail', pk=order.pk)
+    return_url = reverse('cart:order_detail', args=(order.pk,))
     payment = Payment.create({
         "amount": {
             "value": str(order.total_price),
@@ -22,7 +22,7 @@ def get_paid(order):
         },
         "confirmation": {
             "type": "redirect",
-            "return_url": "http://127.0.0.1{}".format(return_url.url)
+            "return_url": f'https://45.153.69.124{return_url}'
         },
         "capture": True,
         "test": True,
@@ -33,11 +33,18 @@ def get_paid(order):
 
 
 def change_seller_product_count(cart):
-    for product_seller, count in map(lambda product: (product['seller'], product['count']),
-                                     cart.values()):
+    for product_seller, count in map(
+            lambda prod: (
+                    prod['seller'],
+                    prod['count'],
+            ),
+            cart.values()):
         seller = SellerProduct.objects.get(pk=product_seller)
         seller.count -= count
         seller.save()
+
+        seller.product.count_sells += count
+        seller.product.save()
 
 
 def get_payment_status(order):

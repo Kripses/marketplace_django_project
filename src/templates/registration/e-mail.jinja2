@@ -21,8 +21,8 @@
 
         <div class="wrapper">
             <div class="header">
-                <h3 class="sign-in">Восстановление пароля (1/2)</h3>
-                <h5>Для восстановления пароля введите адрес электронной почты, на которую зарегистрирована учетная запись</h5>
+                <h3 class="sign-in">{% trans %}Восстановление пароля (1/2){% endtrans %}</h3>
+                <h5>{% trans %}Для восстановления пароля введите адрес электронной почты, на которую зарегистрирована учетная запись{% endtrans %}</h5>
             </div>
 
             <form action="#">
@@ -34,10 +34,10 @@
                     <input class="user-input" type="email" name="login" id="name" placeholder="E-mail" />
                 </div>
                 <div>
-                    <input type="submit" value="Получить проверочный код" />
+                    <input type="submit" value="{% trans %}Получить проверочный код{% endtrans %}" />
                 </div>
                 <a class="registr" href="../registr">
-                    Вход
+                    {% trans %}Вход{% endtrans %}
                 </a>
             </form>
         </div>

@@ -4,9 +4,10 @@ from typing import Any, Dict
 from django.db.models import QuerySet, Count, Min, Max, Sum, BooleanField, ExpressionWrapper, Q
 from django.http import HttpRequest
 
-from ..forms import FilterForm, SearchForm
-from ..models import Product, Tag, Category
+from products.forms import FilterForm, SearchForm
+
 from discounts.models import CategoryDiscount, ComboDiscount, ProductDiscount
+from products.models import Product, Tag, Category
 
 
 class SortEnum(Enum):
@@ -85,7 +86,6 @@ class CatalogQuerySetProcessor:
             self.filter_prices['selected_max'] = str(max_pr)
         elif selected_max_pr == str(round(max_pr, 2)) and self.filter_params.get('price__lte'):
             del self.filter_params['price__lte']
-
         return products_list
 
     def __get_filtered_queryset(self, queryset: QuerySet) -> QuerySet:
@@ -110,8 +110,9 @@ class CatalogQuerySetProcessor:
         """ Получение выбранного типа сортировки из запроса. """
         sort = request.GET.get('sort')
         if sort:
+            sort = sort.strip()
             if ((sort == SortEnum.NONE.value or
-                 sort not in SortEnum._value2member_map_.values()) and
+                 sort not in SortEnum._value2member_map_.keys()) and
                     request.session.get('sort')):
                 del request.session['sort']
             else:
@@ -201,7 +202,7 @@ class CatalogQuerySetProcessor:
 
         return context
 
-    def process_get_params(self, request: HttpRequest, **kwargs,):
+    def process_get_params(self, request: HttpRequest, **kwargs):
         self.__process_path_params(**kwargs)
         change_page = request.GET.get('p')
         if not change_page and not self.after_post:

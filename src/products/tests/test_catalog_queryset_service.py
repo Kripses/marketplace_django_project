@@ -8,7 +8,7 @@ from products.services.catalog_queryset import CatalogQuerySetProcessor, SortEnu
 
 class CatalogQuerysetTest(TestCase):
     fixtures = [
-        'fixtures/profile_fixture.json',
+        'fixtures/account_fixture.json',
         'fixtures/category_fixture.json',
         'fixtures/products_fixture.json',
         'fixtures/sellers_fixture.json',

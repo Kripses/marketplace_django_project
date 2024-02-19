@@ -7,26 +7,26 @@
 <div class="Section-column">
     <div class="Section-columnSection">
         <header class="Section-header">
-            <strong class="Section-title">Навигация
+            <strong class="Section-title">{% trans %}Навигация{% endtrans %}
             </strong>
         </header>
         <div class="Section-columnContent">
             <div class="NavigateProfile">
                 <ul class="menu menu_vt">
                     <li class="menu-item">
-                      <a class="menu-link" id="account" href="{{ url('account:account') }}">Личный кабинет</a>
+                      <a class="menu-link" id="account" href="{{ url('account:account') }}">{% trans %}Личный кабинет{% endtrans %}</a>
                     </li>
                     <li class="menu-item"> {#menu-item_ACTIVE #}
-                      <a class="menu-link" id="profile" href="{{ url('account:profile') }}">Профиль</a>
+                      <a class="menu-link" id="profile" href="{{ url('account:profile') }}">{% trans %}Профиль{% endtrans %}</a>
                     </li>
                     <li class="menu-item">
-                      <a class="menu-link" id="historyorder" href="{{ url('account:historyorder') }}">История заказов</a>
+                      <a class="menu-link" id="historyorder" href="{{ url('account:historyorder') }}">{% trans %}История заказов{% endtrans %}</a>
                     </li>
                     <li class="menu-item">
-                      <a class="menu-link" id="browsing_history" href="{{ url('account:browsing_history') }}">История просмотров</a>
+                      <a class="menu-link" id="browsing_history" href="{{ url('account:browsing_history') }}">{% trans %}История просмотров{% endtrans %}</a>
                     </li>
                     <li class="menu-item">
-                      <a class="menu-link" href="{{ url('account:logout') }}">Выход</a>
+                      <a class="menu-link" href="{{ url('account:logout') }}">{% trans %}Выход{% endtrans %}</a>
                     </li>
 
                 </ul>

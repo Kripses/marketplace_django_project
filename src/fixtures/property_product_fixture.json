@@ -4,7 +4,9 @@
     "pk": 1,
     "fields": {
       "category": 7,
-      "name": "Производитель"
+      "name": "Производитель",
+      "name_ru": "Производитель",
+      "name_en": "Manufacturer"
     }
   },
   {
@@ -12,7 +14,9 @@
     "pk": 2,
     "fields": {
       "category": 7,
-      "name": "Экран"
+      "name": "Экран",
+      "name_ru": "Экран",
+      "name_en": "Screen"
     }
   },
   {
@@ -20,7 +24,9 @@
     "pk": 3,
     "fields": {
       "category": 7,
-      "name": "Процессор"
+      "name": "Процессор",
+      "name_ru": "Процессор",
+      "name_en": "Processor"
     }
   },
   {
@@ -28,7 +34,9 @@
     "pk": 4,
     "fields": {
       "category": 7,
-      "name": "Память"
+      "name": "Память",
+      "name_ru": "Память",
+      "name_en": "Memory"
     }
   },
   {
@@ -36,7 +44,9 @@
     "pk": 5,
     "fields": {
       "category": 7,
-      "name": "Видеокарта"
+      "name": "Видеокарта",
+      "name_ru": "Видеокарта",
+      "name_en": "Video card"
     }
   },
   {
@@ -44,7 +54,9 @@
     "pk": 6,
     "fields": {
       "category": 7,
-      "name": "Версия ОС"
+      "name": "Версия ОС",
+      "name_ru": "Версия ОС",
+      "name_en": "Operating system version"
     }
   },
   {
@@ -52,7 +64,9 @@
     "pk": 7,
     "fields": {
       "category": 9,
-      "name": "Производитель"
+      "name": "Производитель",
+      "name_ru": "Производитель",
+      "name_en": "Manufacturer"
     }
   },
   {
@@ -60,7 +74,9 @@
     "pk": 8,
     "fields": {
       "category": 9,
-      "name": "Экран"
+      "name": "Экран",
+      "name_ru": "Экран",
+      "name_en": "Screen"
     }
   },
   {
@@ -68,7 +84,9 @@
     "pk": 9,
     "fields": {
       "category": 9,
-      "name": "Память"
+      "name": "Память",
+      "name_ru": "Память",
+      "name_en": "Memory"
     }
   },
   {
@@ -76,7 +94,9 @@
     "pk": 10,
     "fields": {
       "category": 9,
-      "name": "Фото"
+      "name": "Фото",
+      "name_ru": "Фото",
+      "name_en": "Photo"
     }
   },
   {
@@ -84,7 +104,9 @@
     "pk": 11,
     "fields": {
       "category": 9,
-      "name": "Аккумулятор"
+      "name": "Аккумулятор",
+      "name_ru": "Аккумулятор",
+      "name_en": "Battery"
     }
   },
   {
@@ -92,7 +114,9 @@
     "pk": 12,
     "fields": {
       "category": 9,
-      "name": "Процессор"
+      "name": "Процессор",
+      "name_ru": "Процессор",
+      "name_en": "Processor"
     }
   },
   {
@@ -100,7 +124,9 @@
     "pk": 13,
     "fields": {
       "category": 5,
-      "name": "Тип устройства"
+      "name": "Тип устройства",
+      "name_ru": "Тип устройства",
+      "name_en": "Device type"
     }
   },
   {
@@ -108,7 +134,9 @@
     "pk": 14,
     "fields": {
       "category": 5,
-      "name": "Конструкция"
+      "name": "Конструкция",
+      "name_ru": "Конструкция",
+      "name_en": "Design"
     }
   },
   {
@@ -116,7 +144,9 @@
     "pk": 15,
     "fields": {
       "category": 5,
-      "name": "Система активного шумоподавления"
+      "name": "Система активного шумоподавления",
+      "name_ru": "Система активного шумоподавления",
+      "name_en": "Active noise cancellation system"
     }
   },
   {
@@ -124,7 +154,9 @@
     "pk": 16,
     "fields": {
       "category": 5,
-      "name": "Разъем штекера"
+      "name": "Разъем штекера",
+      "name_ru": "Разъем штекера",
+      "name_en": "Jack socket"
     }
   },
   {
@@ -132,7 +164,9 @@
     "pk": 17,
     "fields": {
       "category": 5,
-      "name": "Производитель"
+      "name": "Производитель",
+      "name_ru": "Производитель",
+      "name_en": "Manufacturer"
     }
   },
   {
@@ -140,7 +174,9 @@
     "pk": 18,
     "fields": {
       "category": 4,
-      "name": "Производитель"
+      "name": "Производитель",
+      "name_ru": "Производитель",
+      "name_en": "Manufacturer"
     }
   },
   {
@@ -148,7 +184,9 @@
     "pk": 19,
     "fields": {
       "category": 4,
-      "name": "Экран"
+      "name": "Экран",
+      "name_ru": "Экран",
+      "name_en": "Screen"
     }
   },
   {
@@ -156,7 +194,9 @@
     "pk": 20,
     "fields": {
       "category": 4,
-      "name": "Частота обновления"
+      "name": "Частота обновления",
+      "name_ru": "Частота обновления",
+      "name_en": "Refresh rate"
     }
   },
   {
@@ -164,7 +204,9 @@
     "pk": 21,
     "fields": {
       "category": 4,
-      "name": "Поддержка Smart TV"
+      "name": "Поддержка Smart TV",
+      "name_ru": "Поддержка Smart TV",
+      "name_en": "Smart TV support"
     }
   },
   {
@@ -172,7 +214,9 @@
     "pk": 22,
     "fields": {
       "category": 4,
-      "name": "Встроенный модуль Bluetooth"
+      "name": "Встроенный модуль Bluetooth",
+      "name_ru": "Встроенный модуль Bluetooth",
+      "name_en": "Built-in Bluetooth module"
     }
   },
   {
@@ -180,7 +224,9 @@
     "pk": 23,
     "fields": {
       "category": 6,
-      "name": "Производитель"
+      "name": "Производитель",
+      "name_ru": "Производитель",
+      "name_en": "Manufacturer"
     }
   },
   {
@@ -188,7 +234,9 @@
     "pk": 24,
     "fields": {
       "category": 6,
-      "name": "Габаритные размеры"
+      "name": "Габаритные размеры",
+      "name_ru": "Габаритные размеры",
+      "name_en": "Overall dimensions"
     }
   },
   {
@@ -196,7 +244,9 @@
     "pk": 25,
     "fields": {
       "category": 6,
-      "name": "Мотор"
+      "name": "Мотор",
+      "name_ru": "Мотор",
+      "name_en": "Engine"
     }
   },
   {
@@ -204,7 +254,9 @@
     "pk": 26,
     "fields": {
       "category": 6,
-      "name": "Максимальная загрузка"
+      "name": "Максимальная загрузка",
+      "name_ru": "Максимальная загрузка",
+      "name_en": "Maximum load"
     }
   },
   {
@@ -212,7 +264,9 @@
     "pk": 27,
     "fields": {
       "category": 8,
-      "name": "Производитель"
+      "name": "Производитель",
+      "name_ru": "Производитель",
+      "name_en": "Manufacturer"
     }
   },
   {
@@ -220,7 +274,9 @@
     "pk": 28,
     "fields": {
       "category": 8,
-      "name": "Подсветка кнопок"
+      "name": "Подсветка кнопок",
+      "name_ru": "Подсветка кнопок",
+      "name_en": "Button backlighting"
     }
   },
   {
@@ -228,7 +284,9 @@
     "pk": 29,
     "fields": {
       "category": 8,
-      "name": "Тип клавиш"
+      "name": "Тип клавиш",
+      "name_ru": "Тип клавиш",
+      "name_en": "Type of keys"
     }
   },
   {
@@ -236,7 +294,9 @@
     "pk": 30,
     "fields": {
       "category": 8,
-      "name": "Объем"
+      "name": "Объем",
+      "name_ru": "Объем",
+      "name_en": "Volume or Capacity"
     }
   },
   {
@@ -244,7 +304,9 @@
     "pk": 31,
     "fields": {
       "category": 8,
-      "name": "Интерфейс подключения"
+      "name": "Интерфейс подключения",
+      "name_ru": "Интерфейс подключения",
+      "name_en": "Connection interface"
     }
   },
   {
@@ -252,7 +314,9 @@
     "pk": 32,
     "fields": {
       "category": 8,
-      "name": "Тип мыши"
+      "name": "Тип мыши",
+      "name_ru": "Тип мыши",
+      "name_en": "Type of mouse"
     }
   },
   {
@@ -260,7 +324,9 @@
     "pk": 33,
     "fields": {
       "category": 8,
-      "name": "Оптическое разрешение"
+      "name": "Оптическое разрешение",
+      "name_ru": "Оптическое разрешение",
+      "name_en": "Optical resolution"
     }
   }
 ]

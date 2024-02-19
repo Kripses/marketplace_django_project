@@ -3,6 +3,9 @@ from django.core.management import BaseCommand
 
 
 class Command(BaseCommand):
+    """
+    Команда для создания группы Content-managers
+    """
     PERMISSIONS = [
         "view_profile",
         "add_seller",

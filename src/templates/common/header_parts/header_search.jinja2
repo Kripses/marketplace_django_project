@@ -6,7 +6,7 @@
                     <div class="CategoriesButton-icon">
                         <img src="{{ static('assets/img/icons/allDep.svg') }}"
                              alt="allDep.svg" />
-                    </div><span class="CategoriesButton-text">Все категории</span>
+                    </div><span class="CategoriesButton-text">{% trans %}Все категории{% endtrans %}</span>
                     <div class="CategoriesButton-arrow">
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     {% csrf_token %}
                     <input class="search-input" id="query" name="query" type="text" placeholder="NVIDIA GeForce RTX 3060" />
                     <button class="search-button" type="submit" name="search" id="search">
-                        <img src="{{ static('assets/img/icons/search.svg') }}" alt="search.svg" />Поиск
+                        <img src="{{ static('assets/img/icons/search.svg') }}" alt="search.svg" />{% trans %}Поиск{% endtrans %}
                     </button>
                 </form>
             </div>

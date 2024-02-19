@@ -1,10 +1,14 @@
 from django.contrib.auth.models import Group, Permission
 from django.core.management import BaseCommand
 
-from ...models import Seller
+from account.models import Seller
 
 
 class Command(BaseCommand):
+    """
+    Команда для создания группы Sellers.
+    При срабатывании команды, продавцы добавляются в нее.
+    """
     PERMISSIONS = [
         "add_sellerproduct",
         "change_sellerproduct",

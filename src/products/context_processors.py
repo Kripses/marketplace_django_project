@@ -2,9 +2,9 @@ from django.conf import settings
 from django.core.cache import cache
 from django.db.models import Count, Q
 
-from .forms import SearchForm
-from .models import Category
-from .services.banners import CacheableContextCategory
+from products.forms import SearchForm
+from products.models import Category
+from products.services.banners import CacheableContextCategory
 from discounts.models import Discount
 
 CATEGORIES_KEY = 'header_menu_categories'
@@ -58,3 +58,7 @@ def header_menu(request):
         'search_form': SearchForm(),
         'active_discounts': active_discounts,
     }
+
+
+def clear_category_cache():
+    cache.delete(CATEGORIES_KEY)

@@ -4,6 +4,8 @@
     "pk": 1,
     "fields": {
       "name": "Мобильные телефоны",
+      "name_ru": "Мобильные телефоны",
+      "name_en": "Mobile phones",
       "slug": "mobilnye-telefony",
       "is_active": true,
       "parent_category": null,
@@ -17,6 +19,8 @@
     "pk": 2,
     "fields": {
       "name": "Электроника",
+      "name_ru": "Электроника",
+      "name_en": "Electronics",
       "slug": "elektronika",
       "is_active": true,
       "parent_category": null,
@@ -30,6 +34,8 @@
     "pk": 4,
     "fields": {
       "name": "Телевизоры",
+      "name_ru": "Телевизоры",
+      "name_en": "Televisions",
       "slug": "televizory",
       "is_active": true,
       "parent_category": null,
@@ -43,6 +49,8 @@
     "pk": 5,
     "fields": {
       "name": "Наушники",
+      "name_ru": "Наушники",
+      "name_en": "Headphones",
       "slug": "naushniki",
       "is_active": true,
       "parent_category": null,
@@ -56,6 +64,8 @@
     "pk": 6,
     "fields": {
       "name": "Стиральные машины",
+      "name_ru": "Стиральные машины",
+      "name_en": "Washing machines",
       "slug": "stiralnye-mashiny",
       "is_active": true,
       "parent_category": null,
@@ -69,6 +79,8 @@
     "pk": 7,
     "fields": {
       "name": "Ноутбуки",
+      "name_ru": "Ноутбуки",
+      "name_en": "Laptops",
       "slug": "noutbuki",
       "is_active": true,
       "parent_category": 2,
@@ -82,6 +94,8 @@
     "pk": 8,
     "fields": {
       "name": "Аксессуары",
+      "name_ru": "Аксессуары",
+      "name_en": "Accessories",
       "slug": "aksessuary",
       "is_active": true,
       "parent_category": 2,
@@ -95,6 +109,8 @@
     "pk": 9,
     "fields": {
       "name": "Смартфоны",
+      "name_ru": "Смартфоны",
+      "name_en": "Smartphones",
       "slug": "smartfony",
       "is_active": true,
       "parent_category": 1,

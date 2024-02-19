@@ -2,19 +2,19 @@
     <div class="menuModal" id="navigate">
         <ul class="menu menu_main">
             <li class="menu-item">
-                <a class="menu-link" href="{{ url('index') }}">Главная</a>
+                <a class="menu-link" href="{{ url('index') }}">{% trans %}Главная{% endtrans %}</a>
             </li>
             <li class="menu-item">
                 {% if active_discounts %}
                     <a href="{{ url('discounts:discounts_list') }}">
-                        <span class="menu-label menu-label_success">Скидки</span>
+                        <span class="menu-label menu-label_success">{% trans %}Скидки{% endtrans %}</span>
                     </a>
                 {% endif %}
-                <a class="menu-link" href="{{ url('products:catalog') }}">Каталог</a>
+                <a class="menu-link" href="{{ url('products:catalog') }}">{% trans %}Каталог{% endtrans %}</a>
             </li>
             <li class="menu-item">
                 <a class="menu-link" href="{{ url('products:product_compare') }}">
-                    Сравнение
+                    {% trans %}Сравнение{% endtrans %}
                     <span class="CartBlock-amount" style="display: none" id='compare_amt'></span>
                 </a>
             </li>
@@ -31,18 +31,18 @@
                          alt="loon-icon.svg" />
                 </button>
                 <div class="dropdown-content">
-                    <a class="dropdown-content-a" href="{{ url('account:account') }}">Личный кабинет</a>
+                    <a class="dropdown-content-a" href="{{ url('account:account') }}">{% trans %}Личный кабинет{% endtrans %}</a>
                     {% if user.is_staff %}
-                        <a class="dropdown-content-a" href="{{ url('admin:index') }}">Административный раздел</a>
+                        <a class="dropdown-content-a" href="{{ url('admin:index') }}">{% trans %}Административный раздел{% endtrans %}</a>
                     {% endif %}
-                    <a class="dropdown-content-a" href="{{ url('account:logout') }}">Выход</a>
+                    <a class="dropdown-content-a" href="{{ url('account:logout') }}">{% trans %}Выход{% endtrans %}</a>
                 </div>
             </div>
         {% endif %}
         <a class="CartBlock-block" href="{{ url('cart:cart_view') }}">
             <img class="CartBlock-img"
                  src="{{ static('assets/img/icons/cart.svg') }}"
-                 alt="Корзина" />
+                 alt="{% trans %}Корзина{% endtrans %}" />
             <span class="CartBlock-amount" id="cart_amt_header"></span>
         </a>
 {#        <div class="CartBlock-block">#}
@@ -53,7 +53,7 @@
 <div class="row-block Header-trigger">
     <a class="menuTrigger" href="#navigate">
         <div class="menuTrigger-content">
-            Показать навигацию
+            {% trans %}Показать навигацию{% endtrans %}
         </div>
         <span></span><span></span><span></span>
     </a>

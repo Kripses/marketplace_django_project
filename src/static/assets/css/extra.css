@@ -2562,8 +2562,6 @@ a.Cart-title {
 
 .Compare-btn {
     display: flex;
-    width: 41px;
-    height: 41px;
     background-color: #ebebeb;
     justify-content: center;
     align-items: center;

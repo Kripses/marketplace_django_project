@@ -1,7 +1,7 @@
 {% extends 'base.jinja2' %}
 
 {% block title %}
-    {{ product.name }}
+        {{ product.name }}
 {% endblock %}
 
 {% block header %}
@@ -49,7 +49,7 @@
                                             </div>
                                         {% else %}
                                             <div class="ProductCard-priceOutOfStock">
-                                                Нет в наличии.
+                                                {% trans %}Нет в наличии.{% endtrans %}
                                             </div>
                                         {% endif %}
                                     </div>
@@ -76,21 +76,22 @@
                                     <div class="ProductCard-cartElement">
                                         <a class="btn btn_primary" href="#modal_open" onclick="add_to_cart('{{ product.pk }}')">
                                             <img class="btn-icon" src="{{ static('assets/img/icons/card/cart_white.svg') }}" alt="cart_white.svg" />
-                                            <span class="btn-content">Купить</span>
+                                            <span class="btn-content">{% trans %}Купить{% endtrans %}</span>
                                         </a>
                                         <button type="submit" class="btn Compare-btn" onclick="add_to_compare('{{ product.slug }}')">
                                             <img class="btn_icon" src="{{ static('assets/img/icons/link.svg') }}" alt="link.svg">
+                                            <span class="btn-content">{% trans %}Сравнить{% endtrans %}</span>
                                         </button>
                                     </div>
                                     <div id="modal_open" class="my_modal">
                                         <div class="my_modal-dialog">
                                             <div class="my_modal-content">
                                                 <div class="my_modal-header">
-                                                    <p class="my_modal-title">Поздравляем!</p>
-                                                    <a href="#" title="Закрыть модальное окно" class="close">×</a>
+                                                    <p class="my_modal-title">{% trans %}Поздравляем!{% endtrans %}</p>
+                                                    <a href="#" title="{% trans %}Закрыть модальное окно{% endtrans %}" class="close">×</a>
                                                 </div>
                                                 <div class="my_modal-body">
-                                                    <p>Товар успешно добавлен в корзину!</p>
+                                                    <p>{% trans %}Товар успешно добавлен в корзину!{% endtrans %}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,7 +100,7 @@
                             </div>
                             <div class="ProductCard-footer">
                                 <div class="ProductCard-tags">
-                                    <strong class="ProductCard-tagsTitle">Тэги:
+                                    <strong class="ProductCard-tagsTitle">{% trans %}Тэги{% endtrans %}:
                                     </strong><a href="#">{{ product.category }}</a>
                                 </div>
                             </div>
@@ -109,16 +110,16 @@
                     <div class="Tabs Tabs_default">
                         <div class="Tabs-links">
                             <a class="Tabs-link_ACTIVE Tabs-link" href="#description">
-                                <span>Описание</span>
+                                <span>{% trans %}Описание{% endtrans %}</span>
                             </a>
                             <a class="Tabs-link" href="#sellers">
-                                <span>Продавцы</span>
+                                <span>{% trans %}Продавцы{% endtrans %}</span>
                             </a>
                             <a class="Tabs-link" href="#addit">
-                                <span>Характеристика</span>
+                                <span>{% trans %}Характеристика{% endtrans %}</span>
                             </a>
                             <a class="Tabs-link" href="#reviews">
-                                <span>Отзывы ({{ reviews|length }})</span>
+                                <span>{% trans %}Отзывы{% endtrans %} ({{ reviews|length }})</span>
                             </a>
                         </div>
                         <div class="Tabs-wrap">
@@ -139,13 +140,13 @@
                                 <div class="table">
                                     <table>
                                         <tr>
-                                            <th>Характеристика
+                                            <th>{% trans %}Характеристика{% endtrans %}
                                             </th>
-                                            <th>Значение
+                                            <th>{% trans %}Значение{% endtrans %}
                                             </th>
                                         </tr>
                                         <tr>
-                                            <td>Тип устройства
+                                            <td>{% trans %}Тип устройства{% endtrans %}
                                             </td>
                                             <td>{{ product.category }}
                                             </td>
@@ -176,25 +177,25 @@
                                                                 <div class="ProductCard-cartElement" style="margin-top: 10px;">
                                                                     <a class="btn btn_primary" href="#modal_open" onclick="add_to_cart('{{ product.pk }}', '{{ seller.seller.pk }}')">
                                                                         <img class="btn-icon" src="{{ static('assets/img/icons/card/cart_white.svg') }}" alt="cart_white.svg" />
-                                                                        <span class="btn-content">Купить</span>
+                                                                        <span class="btn-content">{% trans %}Купить{% endtrans %}</span>
                                                                     </a>
                                                                 </div>
                                                             </div>
                                                             <div class="row-block">
                                                                 <div class="Order-info Order-info_delivery">
-                                                                    <div class="Order-infoType">Тип доставки:
+                                                                    <div class="Order-infoType">{% trans %}Тип доставки:{% endtrans %}
                                                                     </div>
-                                                                    <div class="Order-infoContent">Обычная доставка
+                                                                    <div class="Order-infoContent">{% trans %}Обычная доставка{% endtrans %}
                                                                     </div>
                                                                 </div>
                                                                 <div class="Order-info Order-info_pay">
-                                                                    <div class="Order-infoType">Оплата:
+                                                                    <div class="Order-infoType">{% trans %}Оплата:{% endtrans %}
                                                                     </div>
-                                                                    <div class="Order-infoContent">Онлайн картой
+                                                                    <div class="Order-infoContent">{% trans %}Онлайн картой{% endtrans %}
                                                                     </div>
                                                                 </div>
                                                                 <div class="Order-info">
-                                                                    <div class="Order-infoType">Стоимость:
+                                                                    <div class="Order-infoType">{% trans %}Стоимость:{% endtrans %}
                                                                     </div>
                                                                     <div class="Order-infoContent">
                                                                             <span class="Order-price">{{ seller.price }}$</span>

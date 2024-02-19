@@ -1,7 +1,7 @@
 {% extends 'base.jinja2' %}
 
 {% block title %}
-  Profile
+  {% trans %}Профиль{% endtrans %}
 {% endblock %}
 
 {% block header %}
@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="row-block">
                                     <div class="form-group">
-                                        <label class="form-label" for="avatar">Аватар</label>
+                                        <label class="form-label" for="avatar">{% trans %}Аватар{% endtrans %}</label>
                                         <div class="Profile-avatar Profile-avatar_noimg">
                                             <label class="Profile-fileLabel" for="avatar"
                                                    style="width: 100%;
@@ -49,7 +49,7 @@
                                     <div class="form-group">
                                         <label class="form-label" for="username">ФИО
 {#                                          {% set full_name = user.username +  + user.first_name %}#}
-                                            <input class="form-input" id="name" name="username" type="text"
+                                            <input class="form-input" id="name" name="full_name" type="text"
                                                    style="text-transform: capitalize"
                                                    value="{{ user.username }} {{ user.first_name }} {{ user.last_name }}"
                                                    data-validate="require" />
@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="row-block">
                                     <div class="form-group">
-                                        <label class="form-label" for="phone">Телефон</label>
+                                        <label class="form-label" for="phone">{% trans %}Телефон{% endtrans %}</label>
                                         {% if not profile.phone %}
                                             <input type="text" name="phone" value='+7 (___) ___-__-__' id="id_phone"
                                             style="color: grey; background-color: #f9fafc">
@@ -86,16 +86,16 @@
                                         <input class="form-input" id="mail" name="mail" type="text" value={{ profile.email }} data-validate="require" />
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="password">Пароль</label>
-                                        <input class="form-input" id="id_new_password1" name="new_password1" type="password" placeholder="Тут можно изменить пароль">
+                                        <label class="form-label" for="password">{% trans %}Пароль{% endtrans %}</label>
+                                        <input class="form-input" id="id_new_password1" name="new_password1" type="password" placeholder="{% trans %}Тут можно изменить пароль{% endtrans %}">
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="passwordReply">Подтверждение пароля</label>
-                                      <input class="form-input" id="id_new_password2" name="new_password2" type="password" placeholder="Введите пароль повторно">
+                                        <label class="form-label" for="passwordReply">{% trans %}Подтверждение пароля{% endtrans %}</label>
+                                      <input class="form-input" id="id_new_password2" name="new_password2" type="password" placeholder="{% trans %}Введите пароль повторно{% endtrans %}">
                                     </div>
                                     <div class="form-group">
                                         <div class="Profile-btn">
-                                            <button class="btn btn_success" type="submit">Сохранить</button>
+                                            <button class="btn btn_success" type="submit">{% trans %}Сохранить{% endtrans %}</button>
                                         </div>
                                         {% if messages %}
                                             <ul class="messages">
@@ -118,24 +118,7 @@
         </div>
     </div>
 
-<script>
-    let coverPreview = document.getElementById('coverPreview');
-    let cover = document.getElementById('cover');
-
-    coverPreview.addEventListener('click',_=>cover.click());
-
-    cover.addEventListener("change",_=>{
-        let file = cover.files[0];
-        console.log(file.mozFullPath);
-        let reader = new FileReader();
-        reader.onload = function (){
-            coverPreview.src = reader.result; }
-        file.name;
-    });
-</script>
-
 <script src="{{ static('admin/js/vendor/jquery/jquery.min.js') }}"></script>
-{#<script src="{{ static('assets/js/form_validation.js') }}"></script>#}
 <script src="{{ static('assets/js/inputmask.min.js') }}"></script>
 <script src="{{ static('assets/js/mask.js') }}"></script>
 {% endblock %}

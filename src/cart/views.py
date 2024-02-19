@@ -1,33 +1,22 @@
-import datetime
-import json
-import logging
-
-from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import F
 from django.views.generic import ListView, DetailView
 from django.core.exceptions import ValidationError
-
+from django.http import HttpResponse, HttpRequest
+from django.shortcuts import render, redirect
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from django_filters.rest_framework import DjangoFilterBackend
 
-from account.models import Profile
 from adminsettings.models import SiteSettings
 from cart.serializer import CartSerializer, ProductSellerSerializer, CartPostSerializer
-from discounts.services.discount_utils import calculate_discounted_prices
-
 from products.models import SellerProduct
-from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
-from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-from .forms import CreateOrderForm
-from .models import Order, Cart
-from .services.cart_actions import check_product_amt
-from .services.order_create import get_total_price, get_fio, get_carts_JSON
-from payments.services.payment_service import get_paid, get_payment_status
+from cart.forms import CreateOrderForm
+from cart.models import Order, Cart
+from cart.services.cart_actions import check_product_amt
+from cart.services.order_create import get_total_price, get_fio, get_carts_JSON
+from payments.services.payment_service import get_paid
 
 
 class OrderListView(LoginRequiredMixin, ListView):
@@ -61,15 +50,16 @@ class CreateOrderView(LoginRequiredMixin, View):
     """
 
     def get(self, request: HttpRequest) -> HttpResponse:
-        if request.user.is_authenticated:
-            fio = get_fio(request.user.last_name, request.user.first_name, request.user.username)
-            carts = (get_carts_JSON(Cart.objects.filter(profile=request.user.id)))
+        user = request.user
+        if user.is_authenticated:
+            fio = get_fio(user.last_name, user.first_name, user.username)
+            carts = (get_carts_JSON(Cart.objects.filter(profile=user.id)))
             total_price, delivery_price = get_total_price(carts)
             context = {
-                'form': CreateOrderForm(initial={"cart": carts, "profile": request.user.id}),
+                'form': CreateOrderForm(initial={"cart": carts, "profile": user.id}),
                 'user_fio': fio,
-                'user_phone': request.user.phone,
-                'user_email': request.user.email,
+                'user_phone': user.phone,
+                'user_email': user.email,
                 'total_price': total_price,
                 'delivery_price': delivery_price,
                 'express': SiteSettings.objects.first().express_delivery_cost,
@@ -81,17 +71,17 @@ class CreateOrderView(LoginRequiredMixin, View):
         return render(request, 'cart/create_order.jinja2', context=context)
 
     def post(self, request, *args, **kwargs):
+
         form = CreateOrderForm(request.POST)
         if form.is_valid():
             form.save()
-            # удалить товары из корзины
-            # Cart.objects.filter(profile=request.user.id).delete()
-
+            Cart.objects.filter(profile=request.user.id).delete()
+            if form.payment_type == ["Online from a random someone else's account"]:
+                # TODO: Вставить обработку запроса по случайному счету
+                return HttpResponse("обработка запроса")
             paid_url = get_paid(Order.objects.filter(profile=request.user.pk).last())
             return redirect(paid_url)
-
-        else:
-            return self.get(request)
+        return self.get(request)
 
 
 class CartView(ListView):
@@ -248,7 +238,14 @@ class CartApiViewSet(ModelViewSet):
             self.get_object().clean(request.data['count'])
             return super().partial_update(request)
         except ValidationError:
-            return Response(request.data)
+            return Response(
+                {'product_seller':
+                    {
+                        'price': self.get_object().product_seller.price
+                    },
+                 'count': request.data['count'] - 1
+                 }
+            )
 
 
 class SellerApiViewSet(ModelViewSet):
@@ -256,4 +253,3 @@ class SellerApiViewSet(ModelViewSet):
     serializer_class = ProductSellerSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_fields = ['product', 'seller']
-

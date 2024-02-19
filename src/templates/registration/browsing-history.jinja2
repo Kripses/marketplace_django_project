@@ -1,11 +1,11 @@
 {% extends 'base.jinja2' %}
 
 {% block title %}
-    История просмотров
+    {% trans %}История просмотров{% endtrans %}
 {% endblock %}
 
 {% block header %}
-  {% include 'common/header_min.jinja2' %}
+  {% include 'common/header_full.jinja2' %}
 {% endblock %}
 
 {% block content %}
@@ -14,8 +14,8 @@
             <div class="wrap">
                 {% include 'navigation/navigation.jinja2' %}
                 <div class="Section-content">
-                <h1 style="text-align: center;">История просмотров</h1>
-                    <h2>Просмотрено товаров: {{ history|length }}</h2>
+                <h1 style="text-align: center;">{% trans %}История просмотров{% endtrans %}</h1>
+                    <h2>{% trans %}Просмотрено товаров:{% endtrans %} {{ history|length }}</h2>
                     {% if history %}
                         <div class="Cards-browsing-history" style="display: flex; flex-wrap: wrap;">
                             {% for item in history %}
@@ -28,7 +28,7 @@
                             {% endfor %}
                         </div>
                     {% else %}
-                        <p>История просмотров пуста</p>
+                        <p>{% trans %}История просмотров пуста{% endtrans %}</p>
                     {% endif %}
                 </div>
             </div>
