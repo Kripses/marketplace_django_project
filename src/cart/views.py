@@ -1,4 +1,6 @@
-from django.db.models import F
+from typing import Any
+
+from django.db.models import F, QuerySet, Model
 from django.views.generic import ListView, DetailView
 from django.core.exceptions import ValidationError
 from django.http import HttpResponse, HttpRequest
@@ -70,27 +72,29 @@ class CreateOrderView(LoginRequiredMixin, View):
 
         return render(request, 'cart/create_order.jinja2', context=context)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request: HttpRequest, *args, **kwargs) -> HttpResponse:
 
         form = CreateOrderForm(request.POST)
         if form.is_valid():
             form.save()
             Cart.objects.filter(profile=request.user.id).delete()
-            if form.payment_type == ["Online from a random someone else's account"]:
-                # TODO: Вставить обработку запроса по случайному счету
-                return HttpResponse("обработка запроса")
+            # if form.cleaned_data['payment_type'] == "Online from a random someone else's account":
+            #
+            #     return HttpResponse("обработка запроса")
             paid_url = get_paid(Order.objects.filter(profile=request.user.pk).last())
             return redirect(paid_url)
         return self.get(request)
 
 
 class CartView(ListView):
+    '''оотбражение корзины'''
     model = Cart
     template_name = 'cart/cart.jinja2'
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet | list:
+        '''получение кверисета корзины'''
         if not self.request.user.is_authenticated:
-            cart_list = self.request.session.get('cart')
+            cart_list: dict = self.request.session.get('cart')
             if cart_list is None:
                 return []
             return [[SellerProduct.objects.get(pk=obj['product_seller']), obj['count']] for obj in cart_list]
@@ -99,7 +103,8 @@ class CartView(ListView):
         check_product_amt(cart)
         return cart
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs) -> dict:
+        '''формирование контекста корзины'''
         context = super().get_context_data()
 
         if not self.request.user.is_authenticated:
@@ -138,7 +143,9 @@ class CartView(ListView):
 
 
 class CartApiViewSet(ModelViewSet):
-    def get_serializer_class(self):
+    '''api для работы с корзиной'''
+    def get_serializer_class(self) -> Any:
+        '''выбор класса сериализации'''
         if not self.request.user.is_authenticated:
             return ProductSellerSerializer
 
@@ -146,7 +153,8 @@ class CartApiViewSet(ModelViewSet):
             return CartPostSerializer
         return CartSerializer
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet | list:
+        '''формирование кверисета корзины в api'''
         if not self.request.user.is_authenticated:
             cart_list = self.request.session.get('cart')
             if cart_list is None:
@@ -155,13 +163,15 @@ class CartApiViewSet(ModelViewSet):
 
         return Cart.objects.filter(profile=self.request.user)
 
-    def get_object(self):
+    def get_object(self) -> Cart | SellerProduct:
+        '''получение объекта корзины'''
         if not self.request.user.is_authenticated:
             return SellerProduct.objects.get(pk=self.kwargs['pk'])
 
         return Cart.objects.filter(profile=self.request.user).get(pk=self.kwargs['pk'])
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request: HttpRequest, *args, **kwargs) -> Response:
+        '''получение списка корзины'''
         if not request.user.is_authenticated:
             cart_list = request.session.get('cart')
             if cart_list is None:
@@ -174,7 +184,8 @@ class CartApiViewSet(ModelViewSet):
 
         return super().list(request)
 
-    def destroy(self, request, *args, **kwargs):
+    def destroy(self, request: HttpRequest, *args, **kwargs) -> Response:
+        '''удаление товара из корзины'''
         if not request.user.is_authenticated:
             cart_list = request.session.get('cart')
             for product in cart_list:
@@ -186,7 +197,8 @@ class CartApiViewSet(ModelViewSet):
 
         return super().destroy(request)
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: HttpRequest, *args, **kwargs) -> Response:
+        '''добавление товара в корзину'''
         if not request.user.is_authenticated:
             cart_list = request.session.get('cart')
             if cart_list is None:
@@ -220,7 +232,8 @@ class CartApiViewSet(ModelViewSet):
         request.data['profile'] = request.user.pk
         return super().create(request)
 
-    def partial_update(self, request, *args, **kwargs):
+    def partial_update(self, request: HttpRequest, *args, **kwargs) -> Response:
+        '''изменение кол-ва товара корзины'''
         if not request.user.is_authenticated:
             cart_list = request.session.get('cart')
             for product in cart_list:
@@ -249,6 +262,7 @@ class CartApiViewSet(ModelViewSet):
 
 
 class SellerApiViewSet(ModelViewSet):
+    '''api для работы с корзиной при неавторизированном пользователе'''
     queryset = SellerProduct.objects.filter(count__gt=0).order_by('price')
     serializer_class = ProductSellerSerializer
     filter_backends = (DjangoFilterBackend,)

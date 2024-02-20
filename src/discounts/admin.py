@@ -58,4 +58,3 @@ class ComboSetAdmin(admin.ModelAdmin):
     raw_id_fields = ['products', 'categories']
     search_fields = ['name', 'products__name', 'categories__name']
     search_help_text = 'Поиск по названию набора или названию товаров/категорий.'
-

@@ -37,9 +37,11 @@
                     </div>
                 </div>
             {% endfor %}
+            {% if reviews %}
             <div class="Comment-more">
                 <button class="btn-more btn btn_muted" id="btn-more">{% trans %}Показать еще{% endtrans %}</button>
             </div>
+            {% endif %}
         </div>
         {% if user.is_authenticated %}
             <header class="Section-header Section-header_product">

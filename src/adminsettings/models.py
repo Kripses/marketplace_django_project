@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class SiteSettings(models.Model):
@@ -16,3 +17,7 @@ class SiteSettings(models.Model):
                                                                   verbose_name="количество товаров от одного продавца")
     top_product_cache_time = models.IntegerField(default=3600,
                                                  verbose_name="время кеширования топ товаров на странице продавца")
+
+    class Meta:
+        verbose_name = _('Site settings')
+        verbose_name_plural = _('Site settings')

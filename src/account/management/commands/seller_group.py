@@ -15,7 +15,7 @@ class Command(BaseCommand):
         "delete_sellerproduct",
     ]
 
-    def handle(self, *args, **options):
+    def handle(self, *args, **options) -> None:
         group, crated = Group.objects.get_or_create(
             name="Sellers"
         )

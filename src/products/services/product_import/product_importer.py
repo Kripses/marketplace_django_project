@@ -2,7 +2,7 @@ from datetime import datetime
 import json
 import io
 from os import path, PathLike
-from typing import Union
+from typing import Union, Dict
 import zipfile
 
 from django.core.exceptions import PermissionDenied
@@ -23,12 +23,19 @@ from products.models import (
 
 
 class ProductImporter:
+    """ Класс, отвечающий за процесс импорта товаров в базу данных. """
     def __init__(
             self,
             file: Union[str, PathLike[str], bytes],
             user_id: int = None,
             email: str = None,
     ):
+        """
+        Args:
+            file (Union[str, PathLike[str], bytes]): zip файл с данными для импорта,
+            user_id (int): id пользователя, инициализировавшего импорт,
+            email(str): почта администратора, на которую будет отправлени отчет о проихведённом импорте.
+        """
         self.__user_id = user_id
         self.__email = email
         self.__original_path = None
@@ -49,7 +56,13 @@ class ProductImporter:
 
         self.__import_products(file)
 
-    def __import_products(self, file: Union[str, PathLike[str], bytes]):
+    def __import_products(self, file: Union[str, PathLike[str], bytes]) -> None:
+        """
+        Запуск процесса импорта.
+
+        Args:
+            file (Union[str, PathLike[str], bytes]): zip файл с данными для импорта.
+        """
         try:
             if self.__user_id:
                 self.__initiating_user = Profile.objects.filter(
@@ -99,6 +112,12 @@ class ProductImporter:
             self.__notify_admin(status, log)
 
     def __check_file(self, file: Union[str, PathLike[str], bytes]):
+        """
+        Проверить, является ли файл валидным.
+
+        Args:
+            file (Union[str, PathLike[str], bytes]): zip файл с данными для импорта
+        """
         if isinstance(file, PathLike) or isinstance(file, str):
             if path.exists(file) and path.isfile(file):
                 self.file = file
@@ -108,7 +127,8 @@ class ProductImporter:
         else:
             raise ValueError('Not a viable file provided')
 
-    def __check_archive(self):
+    def __check_archive(self) -> None:
+        """ Проверка содержимого zip архива. """
         self.archive = zipfile.ZipFile(self.file)
 
         if self.archive.testzip():
@@ -120,7 +140,8 @@ class ProductImporter:
         if not self.__json:
             raise FileNotFoundError('There is no json file in the archive')
 
-    def __get_file_names_from_archive(self):
+    def __get_file_names_from_archive(self) -> None:
+        """ Получение имен файлов, находящихся в архиве. """
         self.file_names = {}
         for info in self.archive.infolist():
             if not info.is_dir():
@@ -138,7 +159,8 @@ class ProductImporter:
                     )
         print(self.file_names)
 
-    def __add_entries_from_archive_to_database(self):
+    def __add_entries_from_archive_to_database(self) -> None:
+        """ Добавить записи в базу данных. """
         json_file = json.loads(self.archive.read(self.__json))
         self.products = json_file.get('products')
         self.seller_products = json_file.get('seller_products')
@@ -149,8 +171,9 @@ class ProductImporter:
             if self.seller_products:
                 self.__add_seller_products_to_database()
 
-    def __add_products_to_database(self):
-        self.__logger.log(f'Importing products')
+    def __add_products_to_database(self) -> None:
+        """ Добавить все записи товаров в базу данных. """
+        self.__logger.log('Importing products')
         self.new_products = {}
 
         for prod_name, prod_content in self.products.items():
@@ -159,7 +182,12 @@ class ProductImporter:
         if self.__successful_product_imports:
             self.__logger.log(f'Imported {self.__successful_product_imports} products')
 
-    def __add_product_to_database(self, prod_content, prod_name):
+    def __add_product_to_database(
+            self,
+            prod_content: Dict,
+            prod_name: str,
+    ) -> None:
+        """ Добавить одну запись о товаре в базу данных. """
         self.__product_imports += 1
         try:
             with transaction.atomic():
@@ -188,8 +216,9 @@ class ProductImporter:
     def __add_pictures_to_database(
         self,
         prod_images,
-        product
+        product: Product,
     ):
+        """ Добавить изображения товаров в базу данных. """
         self.__logger.log(f'Importing product images')
         for image_name in prod_images:
             self.__image_imports += 1
@@ -212,7 +241,8 @@ class ProductImporter:
                     f'Image ({image_name}) product_import failed due to {type(e).__name__}: {e}'
                 )
 
-    def __add_seller_products_to_database(self):
+    def __add_seller_products_to_database(self) -> None:
+        """ Добавить все записи seller_product в базу данных. """
         self.__logger.log(f'Importing seller products')
 
         for sell_prod_name, sell_prod_data in self.seller_products.items():
@@ -222,7 +252,12 @@ class ProductImporter:
                 f'Imported {self.__successful_seller_product_imports} seller products'
             )
 
-    def __add_seller_product_to_database(self, sell_prod_data, sell_prod_name):
+    def __add_seller_product_to_database(
+            self,
+            sell_prod_data: Dict,
+            sell_prod_name: str,
+    ) -> None:
+        """ Добавить одну запись seller_product в базу данных. """
         self.__seller_product_imports += 1
         try:
             with transaction.atomic():
@@ -236,13 +271,14 @@ class ProductImporter:
                 f'Seller product ({sell_prod_name}) import failed due to {type(e).__name__}: {e}',
             )
 
-    def __process_seller_product_params(self, sell_prod):
+    def __process_seller_product_params(self, sell_prod: Dict) -> None:
+        """ Обработать параметры seller_product перед импортом """
         sell_prod['seller'] = Seller.objects.filter(
             pk=sell_prod['seller'],
         ).select_related('profile').first()
-        seller_owner = sell_prod['seller']
+        seller_owner = sell_prod['seller'].profile
         if self.__user_id and not (seller_owner.pk == self.__user_id or
-                                   seller_owner.is_admin or
+                                   seller_owner.is_superuser or
                                    seller_owner.is_staff):
             raise PermissionDenied('Can\'t add products for someone else\'s seller')
         if sell_prod.get('new'):
@@ -253,10 +289,11 @@ class ProductImporter:
                 pk=sell_prod['product'],
             ).first()
 
-        if isinstance(sell_prod.get('new'), int):
+        if isinstance(sell_prod.get('new'), bool):
             del sell_prod['new']
 
-    def __calculate_successful_imports(self):
+    def __calculate_successful_imports(self) -> None:
+        """ Подсчитать количество успешно импортированных записей. """
         self.__successful_imports = sum(
             (
                 self.__successful_product_imports,
@@ -265,7 +302,8 @@ class ProductImporter:
             )
         )
 
-    def __calculate_total_imports(self):
+    def __calculate_total_imports(self) -> None:
+        """ Подсчитать общее количество записей для импорта. """
         self.__total_imports = sum(
             (
                 self.__product_imports,
@@ -274,7 +312,8 @@ class ProductImporter:
             )
         )
 
-    def __get_status(self):
+    def __get_status(self) -> ImportStatusEnum:
+        """ Получить статус импорта. """
         if not self.__successful_imports:
             return ImportStatusEnum.FAILURE
         if self.__successful_imports == self.__total_imports:
@@ -282,7 +321,8 @@ class ProductImporter:
         else:
             return ImportStatusEnum.PARTIAL_SUCCESS
 
-    def __notify_admin(self, status, log):
+    def __notify_admin(self, status: ImportStatusEnum, log: str) -> None:
+        """ Выслать уведомление об импорте на почту админу. """
         if self.__user_id:
             subject = 'Product import initiated by user {pk} | {username}'.format(
                 pk=self.__initiating_user.pk,

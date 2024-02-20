@@ -2,6 +2,7 @@ from django.contrib import admin, messages
 from django.core.cache import cache
 from django.shortcuts import redirect
 from django.urls import path
+from django.utils.translation import gettext as _
 
 from adminsettings.models import SiteSettings
 
@@ -22,7 +23,7 @@ class SiteSettingsAdmin(admin.ModelAdmin):
 
     def reset_cache_action(self, request):
         cache.clear()
-        self.message_user(request, "Кеш успешно сброшен.", messages.SUCCESS)
+        self.message_user(request, _("Кэш успешно сброшен."), messages.SUCCESS)
         return redirect("..")
 
     def get_urls(self):

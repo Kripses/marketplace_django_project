@@ -28,15 +28,14 @@
             <div>
                 <input type="hidden" name="next" value="{{ next }}" />
             </div>
-            <a class="forgot-label" href="../e-mail">{% trans %}Забыли пароль?{% endtrans %}</a>
+            <a class="forgot-label" href="{{ url('account:password_reset') }}">{% trans %}Забыли пароль?{% endtrans %}</a>
             <a class="registr" href="{{ url('account:register') }}">
                 {% trans %}Регистрация{% endtrans %}
             </a>
 
           {% if errors %}
             <div style="color: red">
-            <p>{% trans %}Неверное имя пользователя либо пароль.{% endtrans %}</p>
-{#              {{ form.errors }}#}
+              <p>{% trans %}Неверное имя пользователя либо пароль.{% endtrans %}</p>
             </div>
           {% endif %}
 

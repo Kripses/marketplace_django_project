@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from products.services import product_utils
 from products.validators import validate_not_subcategory
@@ -72,6 +73,8 @@ class Product(models.Model):
         indexes = [
             models.Index(fields=['name', 'slug']),
         ]
+        verbose_name = _('Product')
+        verbose_name_plural = _('Products')
 
     def get_absolute_url(self) -> str:
         """ Получение абсолютной ссылки на продукт. """
@@ -188,6 +191,8 @@ class SellerProduct(models.Model):
 
     class Meta:
         ordering = ['seller', 'product']
+        verbose_name = _('Seller product')
+        verbose_name_plural = _('Seller products')
 
     def __str__(self):
         return f'{self.product} by {self.seller.name}'
@@ -232,8 +237,8 @@ class Category(models.Model):
         indexes = [
             models.Index(fields=['name', 'slug']),
         ]
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+        verbose_name = _('Category')
+        verbose_name_plural = _('Categories')
 
     def __str__(self):
         return self.name
@@ -260,8 +265,8 @@ class Property(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
 
     class Meta:
-        verbose_name = 'property'
-        verbose_name_plural = 'properties'
+        verbose_name = _('Property')
+        verbose_name_plural = _('Properties')
 
     def __str__(self):
         return str(self.name)
@@ -279,6 +284,10 @@ class Value(models.Model):
         related_name='category_property_value'
     )
     value = models.CharField(max_length=200, null=True, blank=True)
+
+    class Meta:
+        verbose_name = _('Value')
+        verbose_name_plural = _('Values')
 
     def __str__(self):
         return str(self.value)
@@ -301,3 +310,7 @@ class ProductImportLog(models.Model):
     items_imported = models.PositiveIntegerField(default=0)
     file_name = models.CharField(null=True, blank=True, max_length=200)
     message_log = models.TextField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = _('Product import log')
+        verbose_name_plural = _('Product import log')

@@ -57,7 +57,7 @@
                                                     {% trans %}Телефон:{% endtrans %}
                                                 </div>
                                                 <div class="Seller-infoContent">
-                                                    {{ seller.profile.phone }}
+                                                    +7{{ seller.profile.phone }}
                                                 </div>
                                             </div>
                                             <div class="Seller-info">
@@ -88,11 +88,12 @@
                                         <div class="Cart-product">
                                             <div class="Cart-block Cart-block_row">
                                                 <div class="Cart-block Cart-block_pict">
-                                                    <a class="Cart-pict" href="#">
+                                                    <a class="Cart-pict" href="{{ url("products:product_details", slug=product.slug) }}">
                                                         <img class="Cart-img" src="/media/{{ product.images.first().image }}" alt="card.jpg">
                                                     </a>
                                                 </div>
-                                                <div class="Cart-block Cart-block_info"><a class="Cart-title" href="#">{{ product.name }}</a>
+                                                <div class="Cart-block Cart-block_info">
+                                                    <a class="Cart-title" href="{{ url("products:product_details", slug=product.slug) }}">{{ product.name }}</a>
                                                     <div class="Cart-desc">
                                                         {{ product.description }}
                                                     </div>

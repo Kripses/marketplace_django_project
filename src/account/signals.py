@@ -6,7 +6,7 @@ from account.models import Seller
 
 
 @receiver(post_save, sender=Seller)
-def add_seller_to_stuff_group(sender, instance, created, **kwargs):
+def add_seller_to_stuff_group(sender, instance, created, **kwargs) -> None:
     """
     Сигнал для добавления новых продавцов в группу Sellers
     и присвоения им статуса is_stuff

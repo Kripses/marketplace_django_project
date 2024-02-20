@@ -9,6 +9,7 @@ from discounts.models import (
 
 
 def get_all_current_discounts() -> List[Any]:
+    """ Получение списка всех активных на данный момент скидок. """
     discounts = []
 
     discounts.extend(ProductDiscount.current.all())

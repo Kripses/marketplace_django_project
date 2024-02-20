@@ -181,12 +181,12 @@
                                         <div class="Cart-product">
                                             <div class="Cart-block Cart-block_row">
                                                 <div class="Cart-block Cart-block_pict">
-                                                    <a class="Cart-pict" href="#">
+                                                    <a class="Cart-pict" href="{{ url("products:product_details", slug=cart['slug']) }}">
                                                         <img class="Cart-img" src="{{ cart['image'] }}" alt="card.jpg" />
                                                     </a>
                                                 </div>
                                                 <div class="Cart-block Cart-block_info">
-                                                    <a class="Cart-title" href="#">{{ cart['name'] }}</a>
+                                                    <a class="Cart-title" href="{{ url("products:product_details", slug=cart['slug']) }}">{{ cart['name'] }}</a>
                                                     {% if (cart['description'])|length > 250 %}
                                                         {% set description = (cart['description'][:250] + '...') %}
                                                     {% else %}

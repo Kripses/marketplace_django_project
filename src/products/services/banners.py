@@ -1,5 +1,7 @@
+from abc import ABC
 import datetime
 import random
+from typing import Dict, List
 
 from django.conf import settings
 from django.core.cache import cache
@@ -15,8 +17,12 @@ LIMITED_OFFERS_KEY = 'index_limited_offer'
 TIMED_LIMITED_OFFER_KEY = 'index_timed_limited_offer'
 
 
-class CacheableContextProduct:
-    # TODO: добавить докстринг для чего этот сервис
+class CacheableContextProduct(ABC):
+    """
+        Базовый DTO с информацией о продукте.
+
+        Пригодный для кэширования.
+    """
     def __init__(self, product: Product):
         self.pk = product.pk
         self.name = product.name
@@ -26,7 +32,7 @@ class CacheableContextProduct:
 
 
 class ProductPreviewCard(CacheableContextProduct):
-    # TODO: добавить докстринг для чего этот сервис
+    """ DTO с информацией о продукте для preview карточки. """
     def __init__(self, product: Product):
         super().__init__(product)
         self.category = product.category.full_name
@@ -35,19 +41,30 @@ class ProductPreviewCard(CacheableContextProduct):
 
 
 class CacheableContextCategory:
-    # TODO: добавить докстринг для чего этот сервис
+    """
+        Базовый DTO с информацией о категории продукта.
+
+        Пригодный для кэширования.
+    """
     def __init__(self, category: Category):
         self.name = category.name
         self.absolute_url = category.get_absolute_url()
 
 
 class Banner:
+    """
+        Класс, содержащий баннеры для главной страницы.
+
+        Баннеры-слайдеры товаров и баннеры категорий.
+    """
     class SliderProduct(CacheableContextProduct):
+        """ DTO с информаций о товаре для баннера-слайдера. """
         def __init__(self, product: Product):
             super().__init__(product)
             self.description = product.description
 
     class BannerCategory(CacheableContextCategory):
+        """ DTO с информацией о категории для баннера. """
         def __init__(self, category: Category):
             super().__init__(category)
             sample = category.products.filter(
@@ -100,11 +117,13 @@ class Banner:
 
 
 class TopSellerProduct(ProductPreviewCard):
+    """ DTO с информацией о товаре для preview карточки популярного товара. """
     def __init__(self, product: Product):
         super().__init__(product)
 
     @staticmethod
-    def get_top_sellers(amount=8):
+    def get_top_sellers(amount : int = 8) -> List['TopSellerProduct']:
+        """ Получение списка preview карточек популярных товаров. """
         top_sellers = cache.get(TOP_SELLERS_KEY)
 
         if not top_sellers:
@@ -128,11 +147,15 @@ class TopSellerProduct(ProductPreviewCard):
 
 
 class LimitedProduct(ProductPreviewCard):
+    """ DTO с информацией о товаре для карточки лимитированного товара. """
     def __init__(self, product: Product):
         super().__init__(product)
 
     @staticmethod
-    def get_limited_offers(amount=16):
+    def get_limited_offers(
+            amount: int = 16,
+    ) -> Dict[str, List['LimitedProduct']]:
+        """ Получение карточек лимитированных товаров. """
         limited_offers = cache.get(LIMITED_OFFERS_KEY)
         timed_limited_offer = cache.get(TIMED_LIMITED_OFFER_KEY)
 
@@ -183,12 +206,17 @@ class LimitedProduct(ProductPreviewCard):
         return result
 
     @staticmethod
-    def _get_limited_offer_end_time():
+    def _get_limited_offer_end_time() -> datetime.datetime:
+        """ Получение времени окончания действия временного баннера. """
         today = datetime.datetime.now(datetime.timezone.utc).today()
-        return datetime.datetime(today.year, today.month, today.day) + datetime.timedelta(days=1)
+        return (
+                datetime.datetime(today.year, today.month, today.day) +
+                datetime.timedelta(days=1)
+        )
 
 
-def clear_banner_cache():
+def clear_banner_cache() -> None:
+    """ Функция для очистки кэша баннеров """
     cache.delete(FIXED_KEY)
     cache.delete(SLIDER_KEY)
     cache.delete(TOP_SELLERS_KEY)

@@ -1,13 +1,14 @@
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 
 from payments.services.payment_service import get_payment_status
 
 from cart.models import Order
 
 
-def payment_webhook_view(request):
+def payment_webhook_view(request: HttpRequest) -> HttpResponse:
+    '''вебхук для получения статуса заказа'''
     if request.method == 'GET':
         return HttpResponse(status=404)
     if request.method == 'POST':

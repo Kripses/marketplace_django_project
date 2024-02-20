@@ -121,7 +121,7 @@
                                     {% if not order.status %}
                                         <form method="POST">
                                         {% csrf_token %}
-                                            <button type="submit" class="btn">
+                                            <button type="submit" class="btn btn_primary btn_lg">
                                                 {% trans %}Оплатить{% endtrans %}
                                             </button>
                                         </form>

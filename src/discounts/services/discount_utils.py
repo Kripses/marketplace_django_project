@@ -15,7 +15,7 @@ from discounts.models import (
 from products.models import Product, SellerProduct
 
 
-def get_discounted_price(discount: Discount, price: Decimal):
+def get_discounted_price(discount: Discount, price: Decimal) -> Decimal:
     """
     Получение цены после применения скидки.
 
@@ -33,7 +33,7 @@ def get_discounted_price(discount: Discount, price: Decimal):
     return discount.value
 
 
-def __get_sort_params(discount: Discount):
+def __get_sort_params(discount: Discount) -> Tuple[int, int]:
     """ Функция-key для сортировки списка скидок. """
     type_weights = {
         ProductDiscount: 3,
@@ -285,7 +285,7 @@ def _process_discounts(
 def _process_combo_discount(
     products: List[Tuple[SellerProduct, int]],
     discount: 'ComboDiscount',
-):
+) -> List[Tuple[SellerProduct, Decimal, int, bool]]:
     """
     Обработка списка товаров с применением скидок на наборы продуктов.
 

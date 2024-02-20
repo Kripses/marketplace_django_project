@@ -24,6 +24,10 @@ class SortEnum(Enum):
 
 
 class CatalogQuerySetProcessor:
+    """
+        Класс, отвечающий за формирование Queryset
+        для запросов страницы каталога товаров.
+    """
     def __init__(self):
         self.tag = None
         self.categories = None
@@ -36,6 +40,7 @@ class CatalogQuerySetProcessor:
         self.after_post = None
 
     def get_queryset(self, request: HttpRequest) -> QuerySet:
+        """ Получение queryset для запроса """
         products_list = self.__get_base_queryset(request)
         products_list = self.__get_filtered_queryset(products_list)
         sort = self.__get_selected_sort_type(request)
@@ -176,6 +181,7 @@ class CatalogQuerySetProcessor:
             context: Dict[str, Any],
             request: HttpRequest,
     ) -> Dict[str, Any]:
+        """ Получение данных для контекста. """
         context['sort'] = SortEnum
         curr_sort = request.session.get('sort')
         if curr_sort:
@@ -202,7 +208,8 @@ class CatalogQuerySetProcessor:
 
         return context
 
-    def process_get_params(self, request: HttpRequest, **kwargs):
+    def process_get_params(self, request: HttpRequest, **kwargs) -> None:
+        """ Обработка параметров GET запроса """
         self.__process_path_params(**kwargs)
         change_page = request.GET.get('p')
         if not change_page and not self.after_post:
@@ -215,7 +222,8 @@ class CatalogQuerySetProcessor:
         self.filter_prices = request.session.get('filter_prices', {})
         self.search_query = request.session.get('search_query')
 
-    def process_post_params(self, request: HttpRequest, **kwargs):
+    def process_post_params(self, request: HttpRequest, **kwargs) -> None:
+        """ Обработка параметров POST запроса """
         self.__process_path_params(**kwargs)
         filter_form = FilterForm(request.POST)
         search_form = SearchForm(request.POST)
@@ -249,7 +257,7 @@ class CatalogQuerySetProcessor:
 
         self.after_post = True
 
-    def __process_path_params(self, **kwargs):
+    def __process_path_params(self, **kwargs) -> None:
         """ Обработка параметров из пути запроса. """
         tag_slug = kwargs.get('tag')
         if tag_slug:
@@ -271,7 +279,8 @@ class CatalogQuerySetProcessor:
         if discount_slug:
             self.__process_discount_slug(discount_slug)
 
-    def __process_discount_slug(self, discount_slug: str):
+    def __process_discount_slug(self, discount_slug: str) -> None:
+        """ Подготовка списка товаров и категорий для queryset на основании slug скидки. """
         product_discount = ProductDiscount.current.filter(
                 slug=discount_slug,
             ).prefetch_related('products').first()
@@ -338,6 +347,7 @@ class CatalogQuerySetProcessor:
 
     @staticmethod
     def __clean_session_filter(request):
+        """ Очистка фильтров из сессии. """
         if request.session.get('filter_in_stock'):
             del request.session['filter_in_stock']
         if request.session.get('filter_params'):
@@ -349,6 +359,7 @@ class CatalogQuerySetProcessor:
 
     @staticmethod
     def __clean_session_search(request):
+        """ Очистка поискового запроса из сессии. """
         if request.session.get('search_query'):
             del request.session['search_query']
 

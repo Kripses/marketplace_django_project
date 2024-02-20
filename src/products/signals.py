@@ -6,7 +6,7 @@ from products.models import Product, SellerProduct
 
 
 @receiver(post_save, sender=Product)
-def clear_product_cache(sender, instance, **kwargs):
+def clear_product_cache(sender, instance, **kwargs) -> None:
     """
     Очистка кеша модели Product при изменении товара в БД.
     """
@@ -15,7 +15,7 @@ def clear_product_cache(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=SellerProduct)
-def clear_sellerproduct_cache(sender, instance, **kwargs):
+def clear_sellerproduct_cache(sender, instance, **kwargs) -> None:
     """
     Очистка кеша при добавлении/изменении товара продавцом
     """

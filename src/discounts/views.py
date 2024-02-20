@@ -5,6 +5,7 @@ from .services.discount_list import get_all_current_discounts
 
 
 class DiscountsListView(TemplateView):
+    """ View страницы списка скидок """
     template_name = 'discounts/discounts.jinja2'
 
     def get_context_data(self, **kwargs):

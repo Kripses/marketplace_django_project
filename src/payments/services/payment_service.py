@@ -1,10 +1,11 @@
 import os
+from typing import NoReturn, Any
+
 from yookassa import Configuration, Payment
 import uuid
 
 from django.urls import reverse
 
-from cart.services.cart_actions import clear_cart
 from cart.models import Order
 from products.models import SellerProduct
 
@@ -13,7 +14,8 @@ Configuration.account_id = os.getenv("SHOP_ID", "")
 Configuration.secret_key = os.getenv("SECRET_KEY", "")
 
 
-def get_paid(order):
+def get_paid(order: Order) -> str:
+    '''Формирует оплату'''
     return_url = reverse('cart:order_detail', args=(order.pk,))
     payment = Payment.create({
         "amount": {
@@ -32,7 +34,8 @@ def get_paid(order):
     return payment.confirmation.confirmation_url
 
 
-def change_seller_product_count(cart):
+def change_seller_product_count(cart: dict[Any]) -> NoReturn:
+    '''Меняет количество товаров у продавца после оплаты'''
     for product_seller, count in map(
             lambda prod: (
                     prod['seller'],
@@ -47,9 +50,8 @@ def change_seller_product_count(cart):
         seller.product.save()
 
 
-def get_payment_status(order):
+def get_payment_status(order: Order) -> NoReturn:
+    '''Меняет статус заказа'''
     change_seller_product_count(order.cart)
-    if order == Order.objects.filter(profile=order.profile, archived=False).last():
-        clear_cart(order.profile)
     order.status = True
     order.save()

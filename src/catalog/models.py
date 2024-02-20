@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from account.models import Profile
 from products.models import Product
@@ -16,5 +17,5 @@ class Review(models.Model):
 
     class Meta:
         ordering = ['-created_at']
-        verbose_name = 'review'
-        verbose_name_plural = 'reviews'
+        verbose_name = _('Review')
+        verbose_name_plural = _('Reviews')

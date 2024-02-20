@@ -1,19 +1,29 @@
-from typing import Tuple
+from typing import Tuple, Dict, List
+
+from cart.models import Cart
 
 from discounts.services.discount_utils import calculate_discounted_prices
 from adminsettings.models import SiteSettings
 
 
-def get_total_price(carts) -> Tuple[int, int]:
-    # TODO: добавить докстринг для чего этот сервис
+def get_total_price(carts: Dict) -> Tuple[int, int]:
+    """
+    Сервис для подстчета итоговой цены заказа
+
+    args:
+        carts  - список товаров в заказе.
+
+    return:
+        total_price - итоговая цена заказа с учетом доставки;
+        delivery_price - цена доставки.
+    """
     total_price = 0
     min_price = SiteSettings.objects.first().min_price_for_free_delivery
     delivery_price = SiteSettings.objects.first().delivery_cost
     for cart in carts.values():
         total_price += cart['price'] * cart['count']
-
     sellers = [cart['seller'] for cart in carts.values()]
-    if not ((len(sellers) > 1 and (all(seller == sellers[0] for seller in sellers))) and total_price >= min_price):
+    if not (all(seller == sellers[0] for seller in sellers) and total_price >= min_price):
         total_price += delivery_price
         return total_price, delivery_price
     return total_price, 0
@@ -29,8 +39,10 @@ def get_fio(first_name: str, last_name: str, username: str) -> str:
     return username
 
 
-def get_carts_JSON(carts):
-    # TODO: добавить докстринг для чего этот сервис
+def get_carts_JSON(carts: List[Cart]) -> Dict:
+    """
+    Сервис для преобразования списка объектов Cart в карзине в JSON-формат.
+    """
     response = {}
     carts_list = [
         (cart.product_seller, cart.count)

@@ -1,11 +1,15 @@
+from profile import Profile
+from typing import NoReturn
+
 from django.core.exceptions import ValidationError
+from django.db.models import QuerySet
 
 from cart.models import Cart
 from products.models import SellerProduct
 
 
-def merge_cart_products(user, cart_list_session):
-    # TODO: добавить докстринг для чего этот сервис
+def merge_cart_products(user: Profile, cart_list_session: list) -> NoReturn:
+    '''мерджит корзину незалогированного пользователя после регистрации или входа в аккаунт'''
     if cart_list_session is None:
         return
     for product_session in cart_list_session:
@@ -28,12 +32,9 @@ def merge_cart_products(user, cart_list_session):
                 product.save()
 
 
-def clear_cart(profile):
-    Cart.objects.filter(profile=profile).delete()
-
-
-def check_product_amt(cart):
-    # TODO: добавить докстринг для чего этот сервис
+def check_product_amt(cart: QuerySet) -> NoReturn:
+    '''После оплаты проверяет корзину других пользователей. Если у них товаров больше, чем есть у продавца, то
+    меняет их количество'''
     cart.filter(product_seller__count=0).delete()
     new_counts = map(
         lambda product:

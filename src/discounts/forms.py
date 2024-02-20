@@ -6,6 +6,7 @@ from . import models
 
 
 class DiscountAdminForm(forms.ModelForm):
+    """ Форма для админки скидки. """
     class Meta:
         models = models.Discount
 
@@ -31,6 +32,7 @@ class DiscountAdminForm(forms.ModelForm):
 
 
 class ComboDiscountAdminForm(DiscountAdminForm):
+    """ Форма для админки скидки на набор товаров. """
     class Meta:
         models = models.ComboDiscount
 

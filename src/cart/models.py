@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from products.models import SellerProduct
 
@@ -10,6 +11,10 @@ class Cart(models.Model):
     product_seller = models.ForeignKey(SellerProduct, on_delete=models.CASCADE, null=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='cart_profile')
     count = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        verbose_name = _('Cart')
+        verbose_name_plural = _('Carts')
 
     def clean(self, product_amt=0):
         if (product_amt > self.product_seller.count) \
@@ -52,3 +57,7 @@ class Order(models.Model):
     status = models.BooleanField(default=False)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     payment_id = models.SlugField(max_length=200, unique=True, null=True)
+
+    class Meta:
+        verbose_name = _('Order')
+        verbose_name_plural = _('Orders')

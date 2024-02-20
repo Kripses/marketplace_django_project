@@ -26,7 +26,7 @@ class Command(BaseCommand):
         "delete_review",
     ]
 
-    def handle(self, *args, **options):
+    def handle(self, *args, **options) -> None:
         group, created = Group.objects.get_or_create(
             name="Content-managers"
         )
